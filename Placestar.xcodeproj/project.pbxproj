@@ -13,6 +13,7 @@
 		DC3112741B45F1760084BDF3 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3112731B45F1760084BDF3 /* HudView.swift */; };
 		DC67086D1B3AD37300C6F17C /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67086C1B3AD37300C6F17C /* CategoryPickerViewController.swift */; };
 		DC68E1651B30C3CD00491237 /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68E1641B30C3CD00491237 /* LocationDetailsViewController.swift */; };
+		DC765B491CE9EA9500C8EF69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC765B471CE9EA9500C8EF69 /* Localizable.strings */; };
 		DC7D52441B274265002B3D0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D52431B274265002B3D0F /* AppDelegate.swift */; };
 		DC7D52461B274265002B3D0F /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D52451B274265002B3D0F /* CurrentLocationViewController.swift */; };
 		DC7D52481B274265002B3D0F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D52471B274265002B3D0F /* SecondViewController.swift */; };
@@ -48,6 +49,11 @@
 		DC3112731B45F1760084BDF3 /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
 		DC67086C1B3AD37300C6F17C /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		DC68E1641B30C3CD00491237 /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
+		DC765B461CE9E70B00C8EF69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		DC765B481CE9EA9500C8EF69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DC765B4A1CE9EE1F00C8EF69 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		DC765B4B1CE9EE1F00C8EF69 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		DC765B4C1CE9EE1F00C8EF69 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DC7D523E1B274265002B3D0F /* Placestar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Placestar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC7D52421B274265002B3D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC7D52431B274265002B3D0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				DC7D52421B274265002B3D0F /* Info.plist */,
+				DC765B471CE9EA9500C8EF69 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -226,6 +233,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = DC7D52351B274265002B3D0F;
 			productRefGroup = DC7D523F1B274265002B3D0F /* Products */;
@@ -244,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC7D524B1B274265002B3D0F /* Main.storyboard in Resources */,
+				DC765B491CE9EA9500C8EF69 /* Localizable.strings in Resources */,
 				DC7D52501B274265002B3D0F /* LaunchScreen.xib in Resources */,
 				DC7D524D1B274265002B3D0F /* Images.xcassets in Resources */,
 			);
@@ -302,10 +311,21 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		DC765B471CE9EA9500C8EF69 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC765B481CE9EA9500C8EF69 /* en */,
+				DC765B4C1CE9EE1F00C8EF69 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		DC7D52491B274265002B3D0F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DC7D524A1B274265002B3D0F /* Base */,
+				DC765B461CE9E70B00C8EF69 /* en */,
+				DC765B4B1CE9EE1F00C8EF69 /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -314,6 +334,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DC7D524F1B274265002B3D0F /* Base */,
+				DC765B4A1CE9EE1F00C8EF69 /* de */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";

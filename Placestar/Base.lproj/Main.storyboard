@@ -158,9 +158,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latitude:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvf-0I-Gg1">
-                                <rect key="frame" x="20" y="39" width="84" height="21"/>
+                                <rect key="frame" x="20" y="39" width="280" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="84" id="c0g-Ir-j64"/>
+                                    <constraint firstAttribute="width" constant="280" id="c0g-Ir-j64"/>
                                     <constraint firstAttribute="height" constant="21" id="nQu-Mz-IyJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -168,10 +168,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Longitude:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SK6-dJ-fak">
-                                <rect key="frame" x="20" y="122" width="97" height="21"/>
+                                <rect key="frame" x="20" y="122" width="280" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="EzW-3e-xN3"/>
-                                    <constraint firstAttribute="width" constant="97" id="f0d-be-8a3"/>
+                                    <constraint firstAttribute="width" constant="280" id="f0d-be-8a3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.20294877886772156" green="0.20297706127166748" blue="0.20293572545051575" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -230,9 +230,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwQ-rZ-WOv">
-                                <rect key="frame" x="20" y="216" width="74" height="21"/>
+                                <rect key="frame" x="20" y="216" width="280" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="74" id="4Fw-EJ-Bam"/>
+                                    <constraint firstAttribute="width" constant="280" id="4Fw-EJ-Bam"/>
                                     <constraint firstAttribute="height" constant="21" id="ASq-0c-xq5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -303,11 +303,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udz-6a-gIa">
-                                                    <rect key="frame" x="121" y="12" width="78" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udz-6a-gIa">
+                                                    <rect key="frame" x="8" y="12" width="304" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="vAd-Pn-OwQ"/>
-                                                        <constraint firstAttribute="width" constant="78" id="ypo-iw-jYP"/>
+                                                        <constraint firstAttribute="width" constant="304" id="ypo-iw-jYP"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.99815672639999997" green="0.057459719479999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -640,7 +640,7 @@
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Q4H-f9-CcR"/>
+        <segue reference="0PR-uy-SEn"/>
         <segue reference="x9D-Q8-PEX"/>
     </inferredMetricsTieBreakers>
 </document>

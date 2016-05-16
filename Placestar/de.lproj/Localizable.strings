@@ -1,0 +1,55 @@
+/* 
+  Localizable.strings
+  Placestar
+
+  Created by Felix Lösing on 16.05.16.
+  Copyright © 2016 Felix Lösing. All rights reserved.
+*/
+
+"location-services-title" = "Ortungsdienste deaktiviert";
+
+"location-services-message" = "Bitte aktiviere Ortungsdienste in den Einstellungen";
+
+"searching-for-address" = "Suchen nach Adresse…";
+
+"no-address-found" = "Keine Adresse gefunden";
+
+"error-finding-address" = "Fehler bei der Adresssuche";
+
+"searching..." = "Suchen...";
+
+"error-getting-location" = "Fehler Position bestimmen";
+
+"location-services-disabled" = "Ortungsdienste deaktiviert";
+
+"no-category" = "keine Kategorie";
+
+"photo-library" = "Fotoarchiv";
+
+"cancel" = "Abbrechen";
+
+"camera" = "Kamera";
+
+"(no-description)" = "(keine Beschreibung)";
+
+"custom-category" = "eigene Kategorie";
+
+"enter-custom-category" = "eigene Kategorie eingeben";
+
+
+"museum" = "Museum";
+"store" = "Laden";
+"bar" = "Bar";
+"bookstore" = "Bücherladen";
+"club" = "Club";
+"grocery-store" = "Lebensmittelmarkt";
+"beautiful-view" = "schöner Ausblick";
+"historic-building" = "historisches Gebäude";
+"house" = "Haus";
+"company" = "Unternehmen";
+"icecream-vendor" = "Eisdiele";
+"valley" = "Tal";
+"landmark" = "Wahrzeichen";
+"park" = "Park";
+"restaurant" = "Restaurant";
+"city" = "Stadt";

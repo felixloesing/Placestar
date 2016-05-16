@@ -41,7 +41,7 @@ class LocationDetailsViewController: UITableViewController {
     var placemark : CLPlacemark?
     
     var descriptionText = ""
-    var categoryName = "No Category"
+    var categoryName = NSLocalizedString("no-category", value: "No Category", comment: "")
     
     var date = NSDate()
     
@@ -110,7 +110,7 @@ class LocationDetailsViewController: UITableViewController {
             print("++++ placemark: \(stringFromPlacemark(placemark))")
             addressLabel.text = stringFromPlacemark(placemark)
         } else {
-            addressLabel.text = "No Address found."
+            addressLabel.text = NSLocalizedString("no-address-found", value: "No Address found", comment: "")
         }
         
         dateLabel.text = formatDate(date)
@@ -388,9 +388,9 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
     
     func showPhotoMenu() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Camera", style: .Default, handler: { _ in self.takePhotoWithCamera()}))
-        alert.addAction(UIAlertAction(title: "Photo Library", style: .Default, handler: { _ in self.choosePhotoFromLibrary()}))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", value: "Cancel", comment: ""), style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("camera", value: "Camera", comment: ""), style: .Default, handler: { _ in self.takePhotoWithCamera()}))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("photo-library", value: "Photo Library", comment: ""), style: .Default, handler: { _ in self.choosePhotoFromLibrary()}))
         
         presentViewController(alert, animated: true, completion: nil)
     }

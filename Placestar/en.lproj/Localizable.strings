@@ -1,0 +1,55 @@
+/* 
+  Localizable.strings
+  Placestar
+
+  Created by Felix Lösing on 16.05.16.
+  Copyright © 2016 Felix Lösing. All rights reserved.
+*/
+
+"location-services-title" = "Location Service disabled";
+
+"location-services-message" = "Please enable Location Services in Settings.";
+
+"searching-for-address" = "Searching for Address…";
+
+"no-address-found" = "No Address found";
+
+"error-finding-address" = "Error finding Address";
+
+"searching..." = "Searching...";
+
+"error-getting-location" = "Error Getting Location";
+
+"location-services-disabled" = "Location Services Disabled";
+
+"no-category" = "No Category";
+
+"photo-library" = "Photo Library";
+
+"cancel" = "Cancel";
+
+"camera" = "Camera";
+
+"(no-description)" = "(No Description)";
+
+"custom-category" = "Custom Category";
+
+"enter-custom-category" = "enter custom Category";
+
+
+"museum" = "Museum";
+"store" = "Store";
+"bar" = "Bar";
+"bookstore" = "Bookstore";
+"club" = "Club";
+"grocery-store" = "Grocery Store";
+"beautiful-view" = "Beautiful View";
+"historic-building" = "Historic Building";
+"house" = "House";
+"company" = "Company";
+"icecream-vendor" = "Icecream Vendor";
+"valley" = "Valley";
+"landmark" = "Landmark";
+"park" = "Park";
+"restaurant" = "Restaurant";
+"city" = "City";

@@ -31,7 +31,7 @@ class LocationCell: UITableViewCell {
     func configureForLocation(location: Location) {
         
         if location.locationDescription.isEmpty {
-            descriptionLabel.text = "(No Description)"
+            descriptionLabel.text = NSLocalizedString("(no-description)", value: "(No Description)", comment: "")
         } else {
             descriptionLabel.text = location.locationDescription
         }

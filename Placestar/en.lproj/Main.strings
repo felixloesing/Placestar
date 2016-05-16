@@ -1,0 +1,84 @@
+
+/* Class = "UILabel"; text = "Adress"; ObjectID = "2zy-pF-2Gq"; */
+"2zy-pF-2Gq.text" = "Adress";
+
+/* Class = "UILabel"; text = "Category"; ObjectID = "5Vc-JC-9aG"; */
+"5Vc-JC-9aG.text" = "Category";
+
+/* Class = "UILabel"; text = "(Address goes here)"; ObjectID = "5Zz-CI-ajI"; */
+"5Zz-CI-ajI.text" = "(Address goes here)";
+
+/* Class = "UINavigationItem"; title = "Placestar"; ObjectID = "6pd-9h-HZn"; */
+"6pd-9h-HZn.title" = "Placestar";
+
+/* Class = "UILabel"; text = "Longitude"; ObjectID = "8ip-Hq-Vf6"; */
+"8ip-Hq-Vf6.text" = "Longitude";
+
+/* Class = "UINavigationItem"; title = "Choose Category"; ObjectID = "9LU-Fz-oOm"; */
+"9LU-Fz-oOm.title" = "Choose Category";
+
+/* Class = "UILabel"; text = "(Longitude goes here)"; ObjectID = "Caa-LA-fy2"; */
+"Caa-LA-fy2.text" = "(Longitude goes here)";
+
+/* Class = "UILabel"; text = "37.33192386"; ObjectID = "Efv-an-NLU"; */
+"Efv-an-NLU.text" = "37.33192386";
+
+/* Class = "UINavigationItem"; title = "Tag Location"; ObjectID = "HZ5-cz-fUL"; */
+"HZ5-cz-fUL.title" = "Tag Location";
+
+/* Class = "UILabel"; text = "(Message Label)"; ObjectID = "NkY-Ez-SPL"; */
+"NkY-Ez-SPL.text" = "(Message Label)";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "PH8-Ji-tvd"; */
+"PH8-Ji-tvd.text" = "Date";
+
+/* Class = "UILabel"; text = "Longitude:"; ObjectID = "SK6-dJ-fak"; */
+"SK6-dJ-fak.text" = "Longitude:";
+
+/* Class = "UITextView"; text = "Apple HQ"; ObjectID = "UMx-hV-L9p"; */
+"UMx-hV-L9p.text" = "Apple HQ";
+
+/* Class = "UILabel"; text = "-122.03009225"; ObjectID = "VS4-Bq-E74"; */
+"VS4-Bq-E74.text" = "-122.03009225";
+
+/* Class = "UITabBarItem"; title = "Tag"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Tag";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "bCw-FI-mxa"; */
+"bCw-FI-mxa.text" = "Description";
+
+/* Class = "UIButton"; normalTitle = "Save Location"; ObjectID = "bOq-xm-v6i"; */
+"bOq-xm-v6i.normalTitle" = "Save Location";
+
+/* Class = "UILabel"; text = "No Category"; ObjectID = "bS6-AL-dUL"; */
+"bS6-AL-dUL.text" = "No Category";
+
+/* Class = "UILabel"; text = "Latitude:"; ObjectID = "bvf-0I-Gg1"; */
+"bvf-0I-Gg1.text" = "Latitude:";
+
+/* Class = "UILabel"; text = "(Latitude goes here)"; ObjectID = "iDZ-9R-s0H"; */
+"iDZ-9R-s0H.text" = "(Latitude goes here)";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "iVw-3D-sgG"; */
+"iVw-3D-sgG.text" = "Detail";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "lhp-9Y-Vfv"; */
+"lhp-9Y-Vfv.text" = "Address";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "o5T-xF-XZ2"; */
+"o5T-xF-XZ2.text" = "Detail";
+
+/* Class = "UILabel"; text = "Latitude"; ObjectID = "oVW-jn-bHO"; */
+"oVW-jn-bHO.text" = "Latitude";
+
+/* Class = "UILabel"; text = "Address:"; ObjectID = "rwQ-rZ-WOv"; */
+"rwQ-rZ-WOv.text" = "Address:";
+
+/* Class = "UINavigationItem"; title = "Current Location"; ObjectID = "teX-ql-BOb"; */
+"teX-ql-BOb.title" = "Current Location";
+
+/* Class = "UILabel"; text = "Add Photo"; ObjectID = "udz-6a-gIa"; */
+"udz-6a-gIa.text" = "Add Photo";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "zZm-FQ-Gil"; */
+"zZm-FQ-Gil.text" = "Title";

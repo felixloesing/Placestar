@@ -27,7 +27,7 @@ class Location: NSManagedObject, MKAnnotation {
     
     var title: String? {
         if locationDescription.isEmpty {
-            return "(No Description)"
+            return NSLocalizedString("(no-description)", value: "(No Description)", comment: "")
         } else {
             return locationDescription
         

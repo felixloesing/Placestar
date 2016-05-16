@@ -11,7 +11,7 @@ import UIKit
 class CategoryPickerViewController: UITableViewController {
     var selectedCategoryName = ""
     
-    var categories = ["No Category","Museum", "Store", "Bar", "Park", "Bookstore", "Club", "Grocery Store","Beautiful View", "Historic Building", "House","Company", "Icecream Vendor", "Valley", "Landmark", "Park", "Restaurant", "City",]
+    var categories = [NSLocalizedString("no-category", value: "No Category", comment: ""), NSLocalizedString("museum", value: "Museum", comment: ""), NSLocalizedString("store", value: "Store", comment: ""), NSLocalizedString("bar", value: "Bar", comment: ""), NSLocalizedString("park", value: "Park", comment: ""), NSLocalizedString("bookstore", value: "Bookstore", comment: ""), NSLocalizedString("club", value: "Club", comment: ""), NSLocalizedString("grocery-store", value: "Grocery Store", comment: ""),NSLocalizedString("beautiful-view", value: "Beautiful View", comment: ""), NSLocalizedString("historic-building", value: "Historic Building", comment: ""), NSLocalizedString("house", value: "House", comment: ""),NSLocalizedString("company", value: "Company", comment: ""), NSLocalizedString("icecream-vendor", value: "Icecream Vendor", comment: ""), NSLocalizedString("valley", value: "Valley", comment: ""), NSLocalizedString("landmark", value: "Landmark", comment: ""), NSLocalizedString("restaurant", value: "Restaurant", comment: ""), NSLocalizedString("city", value: "City", comment: ""),]
     
     
     //var selectedIndexPath = NSIndexPath()
@@ -26,7 +26,7 @@ class CategoryPickerViewController: UITableViewController {
     @IBAction func addCustom(sender: AnyObject) {
         print("custom")
         
-        let alert = UIAlertController(title: "Custom Category", message: "enter custom category", preferredStyle: .Alert)
+        let alert = UIAlertController(title: NSLocalizedString("custom-category", value: "Custom Category", comment: ""), message: NSLocalizedString("enter-custom-category", value: "enter custom Category", comment: ""), preferredStyle: .Alert)
         
         alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
         })

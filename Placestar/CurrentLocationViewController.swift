@@ -88,10 +88,12 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         configureGetButton()
     }
     
+    
+    
     func showLocationServicesDeniedAlert() {
-        let alert = UIAlertController(title: "Location Service disabled", message: "Please enable Location Services in the Settings.", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: NSLocalizedString("location-services-title", value: "Location Service disabled", comment: "Location service title"), message: NSLocalizedString("location-services-message", value: "Please enable Location Services in Settings.", comment: "Location service message"), preferredStyle: UIAlertControllerStyle.Alert)
         
-        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        let alertAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil)
         alert.addAction(alertAction)
         
         presentViewController(alert, animated: true, completion: nil)
@@ -109,11 +111,11 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             if let placemark = placemark {
                 addressLabel.text = stringFromPlacemark(placemark)
             } else if performingReverseGeocoding {
-                addressLabel.text = "Searching for Address…"
+                addressLabel.text = NSLocalizedString("searching-for-address", value: "Searching for Address…", comment: "")
             } else if lastGeocodingError != nil {
-                messageLabel.text = "Error finding Address"
+                messageLabel.text = NSLocalizedString("error-finding-address", value: "Error finding Address", comment: "")
             } else {
-                addressLabel.text = "No Address Found"
+                addressLabel.text = NSLocalizedString("no-address-found", value: "No Address found", comment: "")
             }
             
         } else {
@@ -127,16 +129,16 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             var statusMessage: String
             if let error = lastLocationError {
                 if error.domain == kCLErrorDomain && error.code == CLError.Denied.rawValue {
-                    statusMessage = "Location Services Disabled"
+                    statusMessage = NSLocalizedString("location-services-disabled", value: "Location Services Disabled", comment: "")
                 } else {
-                    statusMessage = "Error Getting Location"
+                    statusMessage = NSLocalizedString("error-getting-location", value: "Error Getting Location", comment: "")
                 }
             } else if !CLLocationManager.locationServicesEnabled() {
-                statusMessage = "Location Services Disabled"
+                statusMessage = NSLocalizedString("location-services-disabled", value: "Location Services Disabled", comment: "")
             } else if updatingLocation {
-                statusMessage = "Searching..."
+                statusMessage = NSLocalizedString("searching...", value: "Searching...", comment: "")
             } else {
-                statusMessage = "Tap 'Get My Location' to Start"
+                statusMessage = ""
             }
             
             messageLabel.text = statusMessage
