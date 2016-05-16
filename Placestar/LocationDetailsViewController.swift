@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreLocation
 import CoreData
+import MapKit
 
 private let dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
@@ -30,6 +31,9 @@ class LocationDetailsViewController: UITableViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var addPhotoLabel: UILabel!
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
     
     var managedObjectContext: NSManagedObjectContext! = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -55,6 +59,8 @@ class LocationDetailsViewController: UITableViewController {
                 date = location.date
                 coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
                 placemark = location.placemark
+                
+                
             }
         }
     }
@@ -64,20 +70,41 @@ class LocationDetailsViewController: UITableViewController {
         super.viewDidLoad()
         
         if let location = locationToEdit {
-            title = "Edit \(location.locationDescription)"
+            //title = "\(location.locationDescription)"
+            title = ""
             
             if location.hasPhoto {
                 if let image = location.photoImage {
                     showImage(image)
+                    self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
                 }
             }
+            
+            let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(location.latitude, location.longitude), 1000, 1000)
+            mapView.setRegion(mapView.regionThatFits(region), animated: true)
+            let pinLocation = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+            // Drop a pin
+            let dropPin = MKPointAnnotation()
+            dropPin.coordinate = pinLocation
+            mapView.addAnnotation(dropPin)
         }
+        
         
         descriptionTextView.text = descriptionText
         categoryLabel.text = categoryName
         
         longitudeLabel.text = String(format: "%.8f", coordinate.longitude)
         latitudeLabel.text = String(format: "%.8f", coordinate.latitude)
+        
+        
+        let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), 1000, 1000)
+        mapView.setRegion(mapView.regionThatFits(region), animated: true)
+        
+        let pinLocation = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
+        // Drop a pin
+        let dropPin = MKPointAnnotation()
+        dropPin.coordinate = pinLocation
+        mapView.addAnnotation(dropPin)
         
         if let placemark = placemark {
             print("++++ placemark: \(stringFromPlacemark(placemark))")
@@ -92,6 +119,9 @@ class LocationDetailsViewController: UITableViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LocationDetailsViewController.dismissKeyboard(_:)))
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
+        tableView.backgroundView = nil
+        tableView.backgroundColor = UIColor.whiteColor()
+        
     }
     
     deinit {
@@ -142,6 +172,7 @@ class LocationDetailsViewController: UITableViewController {
         if let s = placemark.postalCode {
             line2 += s
         }
+        
         
         return line1 + "\n" + line2
     }
@@ -204,7 +235,7 @@ class LocationDetailsViewController: UITableViewController {
             fatalCoreDataError(error)
         }
         
-        afterDelay(0.6, closure: { () -> () in
+        afterDelay(0.0, closure: { () -> () in
             self.dismissViewControllerAnimated(true, completion: nil)
         })
     }
@@ -237,9 +268,14 @@ class LocationDetailsViewController: UITableViewController {
         
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
+            return imageView.hidden ? 44 : UIScreen.mainScreen().bounds.size.width + 2
+
+            
+        case (1, 0):
             return 88
-        case (1, _):
-            return imageView.hidden ? 44 : 280
+            
+        case (1, 2):
+            return 115
             
         case(2, 2):
             
@@ -270,9 +306,9 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 && indexPath.row == 0 {
+        if indexPath.section == 1 && indexPath.row == 0 {
             descriptionTextView.becomeFirstResponder()
-        } else if indexPath.section == 1 && indexPath.row == 0 {
+        } else if indexPath.section == 0 && indexPath.row == 0 {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             pickPhoto()
         }
@@ -291,6 +327,7 @@ class LocationDetailsViewController: UITableViewController {
             }
         }
     }
+    
 }
 
 extension LocationDetailsViewController: UITextViewDelegate {
