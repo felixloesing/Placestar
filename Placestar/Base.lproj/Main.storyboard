@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="LN7-a6-ssJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="LN7-a6-ssJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -12,7 +12,7 @@
         <!--Placestar-->
         <scene sceneID="Top-fP-rcK">
             <objects>
-                <viewController id="1me-8t-8nL" customClass="ViewController" customModule="Placestar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1me-8t-8nL" customClass="ViewController" customModule="Placestar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tc5-d4-TbT"/>
                         <viewControllerLayoutGuide type="bottom" id="YAY-IO-lKd"/>
@@ -339,7 +339,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Apple HQ" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UMx-hV-L9p">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" keyboardDismissMode="onDrag" text="enter name here…" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UMx-hV-L9p">
                                                     <rect key="frame" x="15" y="10" width="290" height="67"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -524,7 +524,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tag Location" id="HZ5-cz-fUL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="PUG-y3-cf9">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="PUG-y3-cf9">
                             <connections>
                                 <action selector="done" destination="TgE-Mr-cTL" id="KW0-GI-3b2"/>
                             </connections>
@@ -541,12 +541,13 @@
                         <outlet property="latitudeLabel" destination="Efv-an-NLU" id="vDR-AQ-MlU"/>
                         <outlet property="longitudeLabel" destination="VS4-Bq-E74" id="hEf-bV-My3"/>
                         <outlet property="mapView" destination="nNo-kS-BGO" id="Vpx-zI-gRo"/>
-                        <segue destination="1me-8t-8nL" kind="modal" identifier="backHome" id="x9D-Q8-PEX"/>
+                        <segue destination="1me-8t-8nL" kind="modal" identifier="backHom" id="x9D-Q8-PEX"/>
+                        <segue destination="LN7-a6-ssJ" kind="modal" identifier="backHome" modalTransitionStyle="flipHorizontal" id="5k8-jH-O9z"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJ0-Ly-kbw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2388" y="-233"/>
+            <point key="canvasLocation" x="2355" y="-200"/>
         </scene>
         <!--Choose Category-->
         <scene sceneID="j1h-0A-WKd">
@@ -619,6 +620,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LN7-a6-ssJ" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="4Rh-K6-Nkx"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bNP-bb-GYq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -640,7 +642,7 @@
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0PR-uy-SEn"/>
         <segue reference="x9D-Q8-PEX"/>
+        <segue reference="Y42-0o-cVl"/>
     </inferredMetricsTieBreakers>
 </document>

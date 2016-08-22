@@ -23,6 +23,7 @@ private let dateFormatter: NSDateFormatter = {
 class LocationDetailsViewController: UITableViewController {
     
     @IBOutlet weak var descriptionTextView: UITextView!
+    
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
     @IBOutlet weak var longitudeLabel: UILabel!
@@ -40,7 +41,7 @@ class LocationDetailsViewController: UITableViewController {
     var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var placemark : CLPlacemark?
     
-    var descriptionText = ""
+    var descriptionText = NSLocalizedString("enter-name-here", value: "enter name here…", comment: "")
     var categoryName = NSLocalizedString("no-category", value: "No Category", comment: "")
     
     var date = NSDate()
@@ -68,6 +69,8 @@ class LocationDetailsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         if let location = locationToEdit {
             //title = "\(location.locationDescription)"
@@ -123,6 +126,17 @@ class LocationDetailsViewController: UITableViewController {
         tableView.backgroundColor = UIColor.whiteColor()
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        if descriptionTextView.text == NSLocalizedString("enter-name-here", value: "enter name here…", comment: "") {
+            descriptionTextView.font = UIFont.italicSystemFontOfSize(descriptionTextView.font!.pointSize)
+            descriptionTextView.textColor = UIColor.grayColor()
+        } else {
+            descriptionTextView.font = UIFont.boldSystemFontOfSize(descriptionTextView.font!.pointSize)
+            descriptionTextView.textColor = UIColor.blackColor()
+        }
+    }
+    
     
     deinit {
         print("*** deinit \(self)")
@@ -182,16 +196,29 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     @IBAction func done() {
+        
+        if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+        }
+        
+        if descriptionText == NSLocalizedString("enter-name-here", value: "enter name here…", comment: "") {
+            descriptionText = ""
+            descriptionTextView.text = ""
+        }
+        
         print("Description: \(descriptionText)")
         
-        let hudView = HudView.hudInView(navigationController!.view, animated: true)
+        
         
         let location: Location
         
         if let tmp = locationToEdit {
-            hudView.text = "updated"
+            //hudView.text = "updated"
             location = tmp
         } else {
+            let hudView = HudView.hudInView((UIApplication.sharedApplication().keyWindow?.subviews.last)!, animated: true)
             hudView.text = "Tagged"
             //create CoreData Location object
             location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: managedObjectContext) as! Location
@@ -236,7 +263,13 @@ class LocationDetailsViewController: UITableViewController {
         }
         
         afterDelay(0.0, closure: { () -> () in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            //self.dismissViewControllerAnimated(true, completion: nil)
+            self.performSegueWithIdentifier("backHome", sender: nil)
+            
+            //var vc = UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("mainView")
+            
+            //self.presentViewController(vc, animated: true, completion: nil)
+            
         })
     }
     
@@ -250,8 +283,8 @@ class LocationDetailsViewController: UITableViewController {
             let controller = segue.destinationViewController as! CategoryPickerViewController
             controller.selectedCategoryName = categoryName
         } else if segue.identifier == "backHome" {
-            let controller = segue.destinationViewController as! ViewController
-            controller.managedObjectContext = managedObjectContext
+            //let controller = segue.destinationViewController as! ViewController
+            //controller.managedObjectContext = managedObjectContext
         }
     }
     
@@ -335,12 +368,23 @@ extension LocationDetailsViewController: UITextViewDelegate {
     //saving text to descriptionText
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         descriptionText = (textView.text as NSString).stringByReplacingCharactersInRange(range, withString: text)
+
         return true
     }
     
     func textViewDidEndEditing(textView: UITextView) {
         descriptionText = textView.text
     }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        descriptionTextView.font = UIFont.boldSystemFontOfSize(descriptionTextView.font!.pointSize)
+        descriptionTextView.textColor = UIColor.blackColor()
+        
+        if textView.text == NSLocalizedString("enter-name-here", value: "enter name here…", comment: "") {
+            textView.text = ""
+        }
+    }
+    
 }
 
 extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

@@ -31,33 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let controller = navigationController.topViewController as! ViewController
         controller.managedObjectContext = self.managedObjectContext
         
-        
-        
-        /*
-         let Controller = window!.rootViewController! as UIViewController
-         
-         if let c = Controller {
-         c
-         }
-         
-         if let tabBarViewControllers = Controller {
-         let currentLocationViewController = tabBarViewControllers[0] as! CurrentLocationViewController
-         
-         currentLocationViewController.managedObjectContext = managedObjectContext
-         
-         /*
-         let navigationController = tabBarViewControllers[1] as! UINavigationController
-         let locationsViewController = navigationController.viewControllers[0] as! LocationsViewController
-         locationsViewController.managedObjectContext = managedObjectContext
-         
-         let mapViewController = tabBarViewControllers[2] as! MapViewController
-         mapViewController.managedObjectContext = managedObjectContext
-         
-         */
-         
-         }
-         
-         */
         listenForFatalCoreDataNotification()
         return true
     }
@@ -110,41 +83,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-
-
-    /* old iOS 8 CoreData stuff
-    lazy var managedObjectContext: NSManagedObjectContext = {
-        if let modelURL = NSBundle.mainBundle().URLForResource("DataModel", withExtension: "momd") {
-        
-            if let model = NSManagedObjectModel(contentsOfURL: modelURL) {
-                let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-                
-                let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-                
-                let documentDirectory = urls[0] 
-                
-                let storeURL = documentDirectory.URLByAppendingPathComponent("DataStore.sqlite")
-                
-                var error: NSError?
-                
-                if let store = coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil, error: &error) {
-                
-                    let context = NSManagedObjectContext()
-                    context.persistentStoreCoordinator = coordinator
-                    return context
-                } else {
-                    print("Error adding persistent store at \(storeURL): \(error!)")
-                }
-            } else {
-                print("Error initializing model from \(modelURL)")
-            }
-        } else {
-            print("Could not find data model in app bundle")
-        }
-        abort()
-    
-    }()
-    */
     
     lazy var managedObjectContext: NSManagedObjectContext = {
         guard let modelURL = NSBundle.mainBundle().URLForResource("DataModel", withExtension: "momd") else {

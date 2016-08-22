@@ -24,6 +24,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     let locationManager = CLLocationManager()
     
+    /*
+    
     var managedObjectContext: NSManagedObjectContext! {
         didSet {
             NSNotificationCenter.defaultCenter().addObserverForName(NSManagedObjectContextObjectsDidChangeNotification, object:         self.managedObjectContext, queue: NSOperationQueue.mainQueue()) { (notification) in
@@ -34,10 +36,12 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             }
         }
     }
+ 
+    */
+    
+    var managedObjectContext: NSManagedObjectContext! = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
     
-    
-    var items: [String] = ["1","2","4","5","6","6","2","4","5","6","6","2","4","5","6","6"]
     
     var alert: UIAlertController!
     
@@ -80,7 +84,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         tableView.bounces = false
         button.layer.cornerRadius = 35
         
-        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-75, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height+85, 0, 0, 0);
         
         let authStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
@@ -114,6 +118,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         super.viewDidAppear(animated)
         performFetch()
         tableView.reloadData()
+        showLocations()
     }
     
     func performFetch() {
@@ -124,10 +129,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     // MARK: - Table view data source
     
@@ -173,14 +174,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     }
     
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
     
     
     
@@ -204,13 +197,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     }
  
     
-    /*
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return fetchedResultsController.sections!.count
-        //return 1
-    }
-    */
-    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let sectionInfo = fetchedResultsController.sections![section]
         return sectionInfo.name
@@ -219,12 +205,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     // MARK: - Navigation
     
-    /*
-    @IBAction func AddButtonPressed(sender: AnyObject) {
-        print("+ Button pressed23")
-        performSegueWithIdentifier("addLocation", sender: sender)
-    }
-    */
+
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(segue)
@@ -245,7 +226,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
 
         } else if segue.identifier == "add" {
             
-            print("CurrentLocationViewController87 *** \(managedObjectContext)")
+            print("CurrentLocationViewController *** \(managedObjectContext)")
             
             let controller = (segue.destinationViewController as! CurrentLocationViewController)
             controller.managedObjectContext = self.managedObjectContext
@@ -262,17 +243,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             controller.locationToEdit = location
         }
     }
-    
-    // MARK: - SubViews
-    
-
-    /*
-    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
-        return true
-    }
- 
-    */
-    
 
     
 

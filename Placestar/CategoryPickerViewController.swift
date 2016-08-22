@@ -14,7 +14,6 @@ class CategoryPickerViewController: UITableViewController {
     var categories = [NSLocalizedString("no-category", value: "No Category", comment: ""), NSLocalizedString("museum", value: "Museum", comment: ""), NSLocalizedString("store", value: "Store", comment: ""), NSLocalizedString("bar", value: "Bar", comment: ""), NSLocalizedString("park", value: "Park", comment: ""), NSLocalizedString("bookstore", value: "Bookstore", comment: ""), NSLocalizedString("club", value: "Club", comment: ""), NSLocalizedString("grocery-store", value: "Grocery Store", comment: ""),NSLocalizedString("beautiful-view", value: "Beautiful View", comment: ""), NSLocalizedString("historic-building", value: "Historic Building", comment: ""), NSLocalizedString("house", value: "House", comment: ""),NSLocalizedString("company", value: "Company", comment: ""), NSLocalizedString("icecream-vendor", value: "Icecream Vendor", comment: ""), NSLocalizedString("valley", value: "Valley", comment: ""), NSLocalizedString("landmark", value: "Landmark", comment: ""), NSLocalizedString("restaurant", value: "Restaurant", comment: ""), NSLocalizedString("city", value: "City", comment: ""),]
     
     
-    //var selectedIndexPath = NSIndexPath()
     
     var customCat = false
     
@@ -83,19 +82,6 @@ class CategoryPickerViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        /*
-        if indexPath.row != selectedIndexPath.row {
-            if let newCell = tableView.cellForRowAtIndexPath(indexPath) {
-                newCell.accessoryType = .Checkmark
-            }
-            
-            if let oldCell = tableView.cellForRowAtIndexPath(selectedIndexPath) {
-                oldCell.accessoryType = .None
-            }
-            
-            selectedIndexPath = indexPath
-            
-        }
-        */
+
     }
 }
