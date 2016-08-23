@@ -541,11 +541,12 @@
                         <outlet property="latitudeLabel" destination="Efv-an-NLU" id="vDR-AQ-MlU"/>
                         <outlet property="longitudeLabel" destination="VS4-Bq-E74" id="hEf-bV-My3"/>
                         <outlet property="mapView" destination="nNo-kS-BGO" id="Vpx-zI-gRo"/>
-                        <segue destination="1me-8t-8nL" kind="modal" identifier="backHom" id="x9D-Q8-PEX"/>
-                        <segue destination="LN7-a6-ssJ" kind="modal" identifier="backHome" modalTransitionStyle="flipHorizontal" id="5k8-jH-O9z"/>
+                        <segue destination="LN7-a6-ssJ" kind="modal" identifier="backHome" id="5k8-jH-O9z"/>
+                        <segue destination="HUl-iy-axO" kind="unwind" identifier="unwindToPlacestar" unwindAction="unwindToPlacestar:" id="dwK-Mc-MDm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJ0-Ly-kbw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="HUl-iy-axO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2355" y="-200"/>
         </scene>
@@ -642,7 +643,6 @@
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x9D-Q8-PEX"/>
         <segue reference="Y42-0o-cVl"/>
     </inferredMetricsTieBreakers>
 </document>

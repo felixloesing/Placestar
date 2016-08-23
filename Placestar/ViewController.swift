@@ -68,6 +68,10 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         fetchedResultsController.delegate = nil
     }
     
+    @IBAction func unwindToPlacestar (sender: UIStoryboardSegue){
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

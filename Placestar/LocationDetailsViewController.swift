@@ -147,6 +147,8 @@ class LocationDetailsViewController: UITableViewController {
         }
     }
     
+
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         descriptionTextView.frame.size.width = view.frame.size.width - 30
@@ -264,7 +266,7 @@ class LocationDetailsViewController: UITableViewController {
         
         afterDelay(0.0, closure: { () -> () in
             //self.dismissViewControllerAnimated(true, completion: nil)
-            self.performSegueWithIdentifier("backHome", sender: nil)
+            self.performSegueWithIdentifier("unwindToPlacestar", sender: self)
             
             //var vc = UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("mainView")
             
