@@ -11,16 +11,16 @@ import Dispatch
 
 
 //free function handling delay to close HUD
-func afterDelay(seconds: Double, closure: () -> ()) {
+func afterDelay(_ seconds: Double, closure: @escaping () -> ()) {
     
-    let when = dispatch_time(DISPATCH_TIME_NOW, Int64(seconds * Double(NSEC_PER_SEC)))
+    let when = DispatchTime.now() + Double(Int64(seconds * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
     
-    dispatch_after(when, dispatch_get_main_queue(), closure)
+    DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
     
 }
 
 let applicationDocumentsDirectory: String = {
-    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
     return paths[0]
 }()
 

@@ -12,10 +12,10 @@ import CoreLocation
 import CoreData
 import MapKit
 
-private let dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
-    formatter.dateStyle = .MediumStyle
-    formatter.timeStyle = .ShortStyle
+private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .short
     print("dateFormatter created")
     return formatter
 }()
@@ -36,7 +36,7 @@ class LocationDetailsViewController: UITableViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     
-    var managedObjectContext: NSManagedObjectContext! = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var managedObjectContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var placemark : CLPlacemark?
@@ -44,7 +44,7 @@ class LocationDetailsViewController: UITableViewController {
     var descriptionText = NSLocalizedString("enter-name-here", value: "enter name here…", comment: "")
     var categoryName = NSLocalizedString("no-category", value: "No Category", comment: "")
     
-    var date = NSDate()
+    var date = Date()
     
     var observer: AnyObject!
     
@@ -57,7 +57,7 @@ class LocationDetailsViewController: UITableViewController {
             if let location = locationToEdit {
                 descriptionText = location.locationDescription
                 categoryName = location.category
-                date = location.date
+                date = location.date as Date
                 coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
                 placemark = location.placemark
                 
@@ -123,17 +123,17 @@ class LocationDetailsViewController: UITableViewController {
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
         tableView.backgroundView = nil
-        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.backgroundColor = UIColor.white
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if descriptionTextView.text == NSLocalizedString("enter-name-here", value: "enter name here…", comment: "") {
-            descriptionTextView.font = UIFont.italicSystemFontOfSize(descriptionTextView.font!.pointSize)
-            descriptionTextView.textColor = UIColor.grayColor()
+            descriptionTextView.font = UIFont.italicSystemFont(ofSize: descriptionTextView.font!.pointSize)
+            descriptionTextView.textColor = UIColor.gray
         } else {
-            descriptionTextView.font = UIFont.boldSystemFontOfSize(descriptionTextView.font!.pointSize)
-            descriptionTextView.textColor = UIColor.blackColor()
+            descriptionTextView.font = UIFont.boldSystemFont(ofSize: descriptionTextView.font!.pointSize)
+            descriptionTextView.textColor = UIColor.black
         }
     }
     
@@ -142,7 +142,7 @@ class LocationDetailsViewController: UITableViewController {
         print("*** deinit \(self)")
         //print(observer)
         if observer != nil {
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            NotificationCenter.default.removeObserver(observer)
             print("*** deleted observer")
         }
     }
@@ -154,20 +154,20 @@ class LocationDetailsViewController: UITableViewController {
         descriptionTextView.frame.size.width = view.frame.size.width - 30
     }
     
-    func dismissKeyboard(gestureReconizer: UIGestureRecognizer) {
+    func dismissKeyboard(_ gestureReconizer: UIGestureRecognizer) {
         //create indexpath from CGpoint value of the tap
-        let point = gestureReconizer.locationInView(tableView)
-        let indexPath = tableView.indexPathForRowAtPoint(point)
+        let point = gestureReconizer.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
         
         //dismiss keyboard if tap happend outside of first cell
-        if indexPath != nil && indexPath!.section == 0 && indexPath!.row == 0 {
+        if indexPath != nil && (indexPath! as NSIndexPath).section == 0 && (indexPath! as NSIndexPath).row == 0 {
             return
         } else {
             descriptionTextView.resignFirstResponder()
         }
     }
     
-    func stringFromPlacemark(placemark: CLPlacemark) -> String {
+    func stringFromPlacemark(_ placemark: CLPlacemark) -> String {
         var line1 = ""
         
         if let s = placemark.subThoroughfare {
@@ -193,13 +193,13 @@ class LocationDetailsViewController: UITableViewController {
         return line1 + "\n" + line2
     }
     
-    func formatDate(date: NSDate) -> String {
-        return dateFormatter.stringFromDate(date)
+    func formatDate(_ date: Date) -> String {
+        return dateFormatter.string(from: date)
     }
     
     @IBAction func done() {
         
-        if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
             }
@@ -220,10 +220,10 @@ class LocationDetailsViewController: UITableViewController {
             //hudView.text = "updated"
             location = tmp
         } else {
-            let hudView = HudView.hudInView((UIApplication.sharedApplication().keyWindow?.subviews.last)!, animated: true)
+            let hudView = HudView.hudInView((UIApplication.shared.keyWindow?.subviews.last)!, animated: true)
             hudView.text = "Tagged"
             //create CoreData Location object
-            location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: managedObjectContext) as! Location
+            location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: managedObjectContext) as! Location
             
             location.photoID = nil
         }
@@ -242,13 +242,13 @@ class LocationDetailsViewController: UITableViewController {
         
         if let image = image {
             if !location.hasPhoto {
-                location.photoID = Location.nextPhotoID()
+                location.photoID = Location.nextPhotoID() as NSNumber?
             }
             
             if let data = UIImageJPEGRepresentation(image, 0.6) {
                 
                 do {
-                    try data.writeToFile(location.photoPath, options: .DataWritingAtomic)
+                    try data.write(to: URL(fileURLWithPath: location.photoPath), options: .atomic)
                 } catch {
                     print("Error writing file: \(error)")
                 }
@@ -266,7 +266,7 @@ class LocationDetailsViewController: UITableViewController {
         
         afterDelay(0.0, closure: { () -> () in
             //self.dismissViewControllerAnimated(true, completion: nil)
-            self.performSegueWithIdentifier("unwindToPlacestar", sender: self)
+            self.performSegue(withIdentifier: "unwindToPlacestar", sender: self)
             
             //var vc = UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("mainView")
             
@@ -276,13 +276,13 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     @IBAction func cancel() {
-        dismissViewControllerAnimated(true, completion: nil)
-        performSegueWithIdentifier("backHome", sender: nil)
+        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "backHome", sender: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PickCategory" {
-            let controller = segue.destinationViewController as! CategoryPickerViewController
+            let controller = segue.destination as! CategoryPickerViewController
             controller.selectedCategoryName = categoryName
         } else if segue.identifier == "backHome" {
             //let controller = segue.destinationViewController as! ViewController
@@ -290,8 +290,8 @@ class LocationDetailsViewController: UITableViewController {
         }
     }
     
-    @IBAction func categoryPickerDidPickCategory(segue: UIStoryboardSegue) {
-        let controller = segue.sourceViewController as! CategoryPickerViewController
+    @IBAction func categoryPickerDidPickCategory(_ segue: UIStoryboardSegue) {
+        let controller = segue.source as! CategoryPickerViewController
         
         categoryName = controller.selectedCategoryName
         categoryLabel.text = categoryName
@@ -299,11 +299,11 @@ class LocationDetailsViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        switch (indexPath.section, indexPath.row) {
+        switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
         case (0, 0):
-            return imageView.hidden ? 44 : UIScreen.mainScreen().bounds.size.width + 2
+            return imageView.isHidden ? 44 : UIScreen.main.bounds.size.width + 2
 
             
         case (1, 0):
@@ -332,30 +332,30 @@ class LocationDetailsViewController: UITableViewController {
     
     
     //only first two sections are tapable
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if indexPath.section == 0 || indexPath.section == 1 {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if (indexPath as NSIndexPath).section == 0 || (indexPath as NSIndexPath).section == 1 {
             return indexPath
         } else {
             return nil
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 1 && indexPath.row == 0 {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 0 {
             descriptionTextView.becomeFirstResponder()
-        } else if indexPath.section == 0 && indexPath.row == 0 {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        } else if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 0 {
+            tableView.deselectRow(at: indexPath, animated: true)
             pickPhoto()
         }
     }
     
     func listenForBackgroundNotification() {
-        observer = NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidEnterBackgroundNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] _ in
+        observer = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: OperationQueue.main) { [weak self] _ in
             
             if let strongSelf = self {
             
                 if strongSelf.presentedViewController != nil {
-                    strongSelf.dismissViewControllerAnimated(false, completion: nil)
+                    strongSelf.dismiss(animated: false, completion: nil)
                 }
             
                 strongSelf.descriptionTextView.resignFirstResponder()
@@ -368,19 +368,19 @@ class LocationDetailsViewController: UITableViewController {
 extension LocationDetailsViewController: UITextViewDelegate {
     
     //saving text to descriptionText
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        descriptionText = (textView.text as NSString).stringByReplacingCharactersInRange(range, withString: text)
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        descriptionText = (textView.text as NSString).replacingCharacters(in: range, with: text)
 
         return true
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         descriptionText = textView.text
     }
     
-    func textViewDidBeginEditing(textView: UITextView) {
-        descriptionTextView.font = UIFont.boldSystemFontOfSize(descriptionTextView.font!.pointSize)
-        descriptionTextView.textColor = UIColor.blackColor()
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        descriptionTextView.font = UIFont.boldSystemFont(ofSize: descriptionTextView.font!.pointSize)
+        descriptionTextView.textColor = UIColor.black
         
         if textView.text == NSLocalizedString("enter-name-here", value: "enter name here…", comment: "") {
             textView.text = ""
@@ -393,23 +393,23 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
     
     func takePhotoWithCamera() {
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .Camera
+        imagePicker.sourceType = .camera
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         
-        presentViewController(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true, completion: nil)
     }
     
     func choosePhotoFromLibrary() {
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .PhotoLibrary
+        imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         
-        presentViewController(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         image = info[UIImagePickerControllerEditedImage] as? UIImage
         
@@ -417,15 +417,15 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
             showImage(image)
         }
         tableView.reloadData()
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
     func pickPhoto() {
-        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
             showPhotoMenu()
         } else {
             choosePhotoFromLibrary()
@@ -433,19 +433,19 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
     }
     
     func showPhotoMenu() {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", value: "Cancel", comment: ""), style: .Cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("camera", value: "Camera", comment: ""), style: .Default, handler: { _ in self.takePhotoWithCamera()}))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("photo-library", value: "Photo Library", comment: ""), style: .Default, handler: { _ in self.choosePhotoFromLibrary()}))
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", value: "Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("camera", value: "Camera", comment: ""), style: .default, handler: { _ in self.takePhotoWithCamera()}))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("photo-library", value: "Photo Library", comment: ""), style: .default, handler: { _ in self.choosePhotoFromLibrary()}))
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
-    func showImage(image: UIImage) {
+    func showImage(_ image: UIImage) {
         imageView.image = image
-        imageView.hidden = false
+        imageView.isHidden = false
         imageView.frame = CGRect(x: 10, y: 10, width: 260, height: 260)
-        addPhotoLabel.hidden = true
+        addPhotoLabel.isHidden = true
     }
 }
 

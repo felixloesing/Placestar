@@ -40,8 +40,8 @@ class Location: NSManagedObject, MKAnnotation {
     
     var photoPath: String {
         assert(photoID != nil, "No photo ID set")
-        let filename = "Photo-\(photoID!.integerValue).jpg"
-        return (applicationDocumentsDirectory as NSString).stringByAppendingPathComponent(filename)
+        let filename = "Photo-\(photoID!.intValue).jpg"
+        return (applicationDocumentsDirectory as NSString).appendingPathComponent(filename)
     }
     
     var photoImage: UIImage? {
@@ -51,9 +51,9 @@ class Location: NSManagedObject, MKAnnotation {
     
     
     class func nextPhotoID() -> Int {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let currentID = userDefaults.integerForKey("PhotoID")
-        userDefaults.setInteger(currentID + 1, forKey: "PhotoID")
+        let userDefaults = UserDefaults.standard
+        let currentID = userDefaults.integer(forKey: "PhotoID")
+        userDefaults.set(currentID + 1, forKey: "PhotoID")
         userDefaults.synchronize()
         return currentID
         
@@ -68,10 +68,10 @@ class Location: NSManagedObject, MKAnnotation {
         if hasPhoto {
             let path = photoPath
             
-            let fileManager = NSFileManager.defaultManager()
-            if fileManager.fileExistsAtPath(path) {
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: path) {
                 do {
-                    try fileManager.removeItemAtPath(path)
+                    try fileManager.removeItem(atPath: path)
                 } catch {
                     print("*** Error removing file \(error)")
                 }

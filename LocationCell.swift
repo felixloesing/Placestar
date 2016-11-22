@@ -22,13 +22,13 @@ class LocationCell: UITableViewCell {
         separatorInset = UIEdgeInsets(top: 0, left: 82, bottom: 0, right: 0)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func configureForLocation(location: Location) {
+    func configureForLocation(_ location: Location) {
         
         if location.locationDescription.isEmpty {
             descriptionLabel.text = NSLocalizedString("(no-description)", value: "(No Description)", comment: "")
@@ -56,7 +56,7 @@ class LocationCell: UITableViewCell {
         
     }
     
-    func imageForLocation(location: Location) -> UIImage {
+    func imageForLocation(_ location: Location) -> UIImage {
         if location.hasPhoto, let image = location.photoImage {
             return image.resizedImageWithBounds(CGSize(width: 52, height: 52))
         }

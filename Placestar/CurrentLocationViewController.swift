@@ -19,7 +19,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var tagButton: UIButton!
 
     
-    var managedObjectContext: NSManagedObjectContext! = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var managedObjectContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     //location
     let locationManager = CLLocationManager()
@@ -34,7 +34,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     var lastGeocodingError: NSError?
     
     //timer for 60 sec. timeout
-    var timer: NSTimer?
+    var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         addressLabel.clipsToBounds = true
     }
     
-    @IBAction func refreshButton(sender: AnyObject) {
+    @IBAction func refreshButton(_ sender: AnyObject) {
         if updatingLocation {
             stopLocationManager()
         }
@@ -63,12 +63,12 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         //checking location service settings
         let authStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
-        if authStatus == .NotDetermined {
+        if authStatus == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
             return
         }
         
-        if authStatus == .Denied || authStatus == .Restricted {
+        if authStatus == .denied || authStatus == .restricted {
             showLocationServicesDeniedAlert()
             return
         }
@@ -91,12 +91,12 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     
     func showLocationServicesDeniedAlert() {
-        let alert = UIAlertController(title: NSLocalizedString("location-services-title", value: "Location Service disabled", comment: "Location service title"), message: NSLocalizedString("location-services-message", value: "Please enable Location Services in Settings.", comment: "Location service message"), preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: NSLocalizedString("location-services-title", value: "Location Service disabled", comment: "Location service title"), message: NSLocalizedString("location-services-message", value: "Please enable Location Services in Settings.", comment: "Location service message"), preferredStyle: UIAlertControllerStyle.alert)
         
-        let alertAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil)
+        let alertAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil)
         alert.addAction(alertAction)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     func updateLabels() {
@@ -104,7 +104,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             //updating labels
             latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
             longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
-            tagButton.hidden = false
+            tagButton.isHidden = false
             messageLabel.text = ""
             
             //display adress or error message
@@ -123,12 +123,12 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             latitudeLabel.text = ""
             longitudeLabel.text = ""
             addressLabel.text = ""
-            tagButton.hidden = true
+            tagButton.isHidden = true
             
             //displaying error messages
             var statusMessage: String
             if let error = lastLocationError {
-                if error.domain == kCLErrorDomain && error.code == CLError.Denied.rawValue {
+                if error.domain == kCLErrorDomain && error.code == CLError.Code.denied.rawValue {
                     statusMessage = NSLocalizedString("location-services-disabled", value: "Location Services Disabled", comment: "")
                 } else {
                     statusMessage = NSLocalizedString("error-getting-location", value: "Error Getting Location", comment: "")
@@ -153,7 +153,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             locationManager.startUpdatingLocation()
             updatingLocation = true
             
-            timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(CurrentLocationViewController.didTimeOut), userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(CurrentLocationViewController.didTimeOut), userInfo: nil, repeats: false)
         }
     }
     
@@ -183,7 +183,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     
     
-    func stringFromPlacemark(placemark: CLPlacemark) -> String {
+    func stringFromPlacemark(_ placemark: CLPlacemark) -> String {
         var line1 = ""
         
         if let s = placemark.subThoroughfare {
@@ -222,18 +222,19 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     // MARK: - CLLocationManagerDelegate
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("didFailwithError \(error)")
-        if error.code == CLError.LocationUnknown.rawValue {
+        if (error as NSError).code == CLError.locationUnknown.rawValue {
             return
         }
-        lastLocationError = error
+        
+        lastLocationError = error as NSError?
         stopLocationManager()
         updateLabels()
         configureGetButton()
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
         print("didUpdateLocationLocations \(newLocation)")
         
@@ -249,7 +250,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         //distance between last and current location
         var distance = CLLocationDistance(DBL_MAX)
         if let location = location {
-            distance = newLocation.distanceFromLocation(location)
+            distance = newLocation.distance(from: location)
         }
         
         //comparing accuracies & clearing errors and updating
@@ -276,10 +277,10 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 
                 geocoder.reverseGeocodeLocation(location!, completionHandler: { (placemarks, error) -> Void in
                     
-                    self.lastGeocodingError = error
+                    self.lastGeocodingError = error as NSError?
                     
-                    self.lastGeocodingError = error
-                    if error == nil, let p = placemarks where !p.isEmpty {
+                    self.lastGeocodingError = error as NSError?
+                    if error == nil, let p = placemarks , !p.isEmpty {
                         self.placemark = p.last!
                     } else {
                         self.placemark = nil
@@ -292,7 +293,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 
             } else if distance < 1.0 {
                 //calculating time between locations
-                let timeInterval = newLocation.timestamp.timeIntervalSinceDate(location!.timestamp)
+                let timeInterval = newLocation.timestamp.timeIntervalSince(location!.timestamp)
                 
                 //stop after 10 sec. without better location
                 if timeInterval > 10 {
@@ -306,9 +307,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "TagLocation" {
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             
             let controller = navigationController.topViewController as! LocationDetailsViewController
             

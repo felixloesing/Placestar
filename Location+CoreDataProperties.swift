@@ -16,7 +16,7 @@ import CoreLocation
 extension Location {
 
     @NSManaged var category: String
-    @NSManaged var date: NSDate
+    @NSManaged var date: Date
     @NSManaged var latitude: Double
     @NSManaged var locationDescription: String
     @NSManaged var longitude: Double

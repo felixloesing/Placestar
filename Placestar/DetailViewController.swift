@@ -19,9 +19,9 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     var items: [String] = ["1","2","3","4","5","6","7","8","9"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         // Do any additional setup after loading the view, typically from a nib.
-        self.tableView.backgroundColor = UIColor.clearColor();
+        self.tableView.backgroundColor = UIColor.clear;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
     }
@@ -39,21 +39,21 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     
     
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView.contentOffset.y < self.mapView.frame.size.height * -1 ) {
-            scrollView .setContentOffset(CGPointMake(scrollView.contentOffset.x, self.mapView.frame.size.height * -1), animated: true)
+            scrollView .setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: self.mapView.frame.size.height * -1), animated: true)
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 9
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell? = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell?
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell? = self.tableView.dequeueReusableCell(withIdentifier: "cell") as UITableViewCell?
         
-        cell?.textLabel?.text = self.items[indexPath.row]
+        cell?.textLabel?.text = self.items[(indexPath as NSIndexPath).row]
         
         return cell!
         

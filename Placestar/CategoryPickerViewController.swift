@@ -19,58 +19,58 @@ class CategoryPickerViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        categories = categories.sort()
+        categories = categories.sorted()
     }
     
-    @IBAction func addCustom(sender: AnyObject) {
+    @IBAction func addCustom(_ sender: AnyObject) {
         print("custom")
         
-        let alert = UIAlertController(title: NSLocalizedString("custom-category", value: "Custom Category", comment: ""), message: NSLocalizedString("enter-custom-category", value: "enter custom Category", comment: ""), preferredStyle: .Alert)
+        let alert = UIAlertController(title: NSLocalizedString("custom-category", value: "Custom Category", comment: ""), message: NSLocalizedString("enter-custom-category", value: "enter custom Category", comment: ""), preferredStyle: .alert)
         
-        alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+        alert.addTextField(configurationHandler: { (textField) -> Void in
         })
         
-        alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: { (action) -> Void in
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action) -> Void in
             let textField = alert.textFields![0] as UITextField
             
             self.selectedCategoryName = textField.text!
             self.customCat = true
             
-            self.performSegueWithIdentifier("PickedCategory", sender: self)
+            self.performSegue(withIdentifier: "PickedCategory", sender: self)
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     //MARK: - TableView Data Source
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as UITableViewCell!
         
-        let categoryName = categories[indexPath.row]
-        cell.textLabel?.text = categoryName
+        let categoryName = categories[(indexPath as NSIndexPath).row]
+        cell?.textLabel?.text = categoryName
         
         
         if categoryName == selectedCategoryName {
-            cell.accessoryType = .Checkmark
+            cell?.accessoryType = .checkmark
             //selectedIndexPath = indexPath
         } else {
-            cell.accessoryType = .None
+            cell?.accessoryType = .none
         }
  
-        return cell
+        return cell!
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PickedCategory" {
             if customCat == false {
             
                 let cell = sender as! UITableViewCell
-                if let indexPath = tableView.indexPathForCell(cell) {
-                    selectedCategoryName = categories[indexPath.row]
+                if let indexPath = tableView.indexPath(for: cell) {
+                    selectedCategoryName = categories[(indexPath as NSIndexPath).row]
                 }
             } else {
                 //selectedCategoryName = selectedCategoryName
@@ -80,7 +80,7 @@ class CategoryPickerViewController: UITableViewController {
     
     //MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 
     }

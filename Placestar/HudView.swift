@@ -13,11 +13,11 @@ class HudView: UIView {
     var text = ""
     
     //convenience construct
-    class func hudInView(view: UIView, animated: Bool) -> HudView {
+    class func hudInView(_ view: UIView, animated: Bool) -> HudView {
         let hudView = HudView(frame: view.bounds)
         
         view.addSubview(hudView)
-        view.userInteractionEnabled = false
+        view.isUserInteractionEnabled = false
         
         hudView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         
@@ -26,7 +26,7 @@ class HudView: UIView {
         return hudView
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
         //create black, transparent box
         let boxWidth: CGFloat = 96
@@ -42,30 +42,30 @@ class HudView: UIView {
         if let image = UIImage(named: "Checkmark") {
             let imagePoint = CGPoint(x: center.x - round(image.size.width / 2), y: center.y - round(image.size.height / 2) - boxHeight / 8)
             
-            image.drawAtPoint(imagePoint)
+            image.draw(at: imagePoint)
         }
         
         //draw text
-        let attribs = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: UIColor.whiteColor()]
+        let attribs = [NSFontAttributeName: UIFont.systemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.white]
         
         //calc size of String
-        let textSize = text.sizeWithAttributes(attribs)
+        let textSize = text.size(attributes: attribs)
         
         //position text
         let textPoint = CGPoint(x: center.x - round(textSize.width / 2), y: center.y - round(textSize.height / 2) + boxHeight / 4)
-        text.drawAtPoint(textPoint, withAttributes: attribs)
+        text.draw(at: textPoint, withAttributes: attribs)
         
     }
     
-    func showAnimated(animated: Bool) {
+    func showAnimated(_ animated: Bool) {
         if animated {
             alpha = 0
-            transform = CGAffineTransformMakeScale(1.3, 1.3)
+            transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             
             //spring animation
-            UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.6, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.6, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
                 self.alpha = 1
-                self.transform = CGAffineTransformIdentity
+                self.transform = CGAffineTransform.identity
             }, completion: nil)
             
             /*

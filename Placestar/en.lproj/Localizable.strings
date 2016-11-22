@@ -36,21 +36,36 @@
 
 "enter-custom-category" = "enter custom Category";
 
-
 "museum" = "Museum";
+
 "store" = "Store";
+
 "bar" = "Bar";
+
 "bookstore" = "Bookstore";
+
 "club" = "Club";
+
 "grocery-store" = "Grocery Store";
+
 "beautiful-view" = "Beautiful View";
+
 "historic-building" = "Historic Building";
+
 "house" = "House";
+
 "company" = "Company";
+
 "icecream-vendor" = "Icecream Vendor";
+
 "valley" = "Valley";
+
 "landmark" = "Landmark";
+
 "park" = "Park";
+
 "restaurant" = "Restaurant";
+
 "city" = "City";
+
 "enter-name-here" = "enter name here…";

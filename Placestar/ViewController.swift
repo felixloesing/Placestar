@@ -39,17 +39,17 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
  
     */
     
-    var managedObjectContext: NSManagedObjectContext! = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var managedObjectContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
 
     
     
     var alert: UIAlertController!
     
     
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-        let fetchRequest = NSFetchRequest()
+    lazy var fetchedResultsController: NSFetchedResultsController<Location> = {
+        let fetchRequest = NSFetchRequest<Location>()
         
-        let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: self.managedObjectContext)
+        let entity = NSEntityDescription.entity(forEntityName: "Location", in: self.managedObjectContext)
         fetchRequest.entity = entity
         
         let sortDescriptor1 = NSSortDescriptor(key: "locationDescription", ascending: true)
@@ -68,7 +68,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         fetchedResultsController.delegate = nil
     }
     
-    @IBAction func unwindToPlacestar (sender: UIStoryboardSegue){
+    @IBAction func unwindToPlacestar (_ sender: UIStoryboardSegue){
         
     }
     
@@ -79,7 +79,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         
         performFetch()
         
-        self.tableView.backgroundColor = UIColor.clearColor()
+        self.tableView.backgroundColor = UIColor.clear
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -92,10 +92,10 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         
         let authStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
-        if authStatus == .NotDetermined {
+        if authStatus == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
             return
-        } else if authStatus == .AuthorizedWhenInUse || authStatus == .AuthorizedAlways {
+        } else if authStatus == .authorizedWhenInUse || authStatus == .authorizedAlways {
             updateLocations()
             showLocations()
         }
@@ -109,7 +109,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("appeared")
         //self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-80, 0, 0, 0);
@@ -118,7 +118,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         performFetch()
         tableView.reloadData()
@@ -136,16 +136,16 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     // MARK: - Table view data source
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("LocationCell", forIndexPath: indexPath) as! LocationCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
         
-        let location = fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+        let location = fetchedResultsController.object(at: indexPath)
         
         // Configure the cell...
         
@@ -173,7 +173,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 57.0
     }
     
@@ -182,12 +182,12 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     
     // Override to support editing the table view.
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             // Delete the row from the data source
-            let location = fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+            let location = fetchedResultsController.object(at: indexPath)
             
-            managedObjectContext.deleteObject(location)
+            managedObjectContext.delete(location)
             location.removePhotoFile()
             
             do {
@@ -201,7 +201,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     }
  
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let sectionInfo = fetchedResultsController.sections![section]
         return sectionInfo.name
     }
@@ -211,16 +211,16 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print(segue)
         if segue.identifier == "EditLocation" {
-            let navController = segue.destinationViewController as! UINavigationController
+            let navController = segue.destination as! UINavigationController
             let controller = navController.topViewController as! LocationDetailsViewController
             
             controller.managedObjectContext = managedObjectContext
             
-            if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
-                let location = fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                let location = fetchedResultsController.object(at: indexPath)
                 controller.locationToEdit = location
                 
                 
@@ -232,11 +232,11 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             
             print("CurrentLocationViewController *** \(managedObjectContext)")
             
-            let controller = (segue.destinationViewController as! CurrentLocationViewController)
+            let controller = (segue.destination as! CurrentLocationViewController)
             controller.managedObjectContext = self.managedObjectContext
             
         } else if segue.identifier == "EditMapLocation" {
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             
             let controller = navigationController.topViewController as! LocationDetailsViewController
             
@@ -259,9 +259,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
 
 
 
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView.contentOffset.y < self.mapView.frame.size.height * -1 ) {
-            scrollView .setContentOffset(CGPointMake(scrollView.contentOffset.x, self.mapView.frame.size.height * -1), animated: true)
+            scrollView .setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: self.mapView.frame.size.height * -1), animated: true)
         }
     }
 
@@ -269,56 +269,56 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
 
     // MARK: - FetchedResultController
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print("*** controllerWillChangeContent")
         tableView.beginUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeObject anObject: Any, atIndexPath indexPath: IndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
-        case .Insert:
+        case .insert:
             print("*** NSFetchedResultsChangeInsert (object)")
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
             
-        case .Delete:
+        case .delete:
             print("*** NSFetchedResultsChangeDelete (object)")
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath!], with: .fade)
             
-        case.Update:
+        case.update:
             print("*** NSFetchedResultsChangeUpdate (object)")
             
-            if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? LocationCell {
-                let location = controller.objectAtIndexPath(indexPath!) as! Location
+            if let cell = tableView.cellForRow(at: indexPath!) as? LocationCell {
+                let location = controller.object(at: indexPath!) as! Location
                 cell.configureForLocation(location)
             }
             
-        case .Move:
+        case .move:
             print("*** NSFetchedResultsChangeMove (object)")
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         
         switch type {
-        case .Insert:
+        case .insert:
             print("*** NSFetchedResultsChangeInsert (section)")
-            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
             
-        case .Delete:
+        case .delete:
             print("*** NSFetchedResultsChangeDelete (section)")
-            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        case .Update:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .update:
             print("*** NSFetchedResultsChangeUpdate (section)")
             
-        case .Move:
+        case .move:
             print("*** NSFetchedResultsChangeMove (section)")
         }
         
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print("*** controllerDidChangeContent")
         tableView.endUpdates()
         
@@ -342,17 +342,17 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     func updateLocations() {
         mapView.removeAnnotations(locations)
         
-        let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: managedObjectContext)
+        let entity = NSEntityDescription.entity(forEntityName: "Location", in: managedObjectContext)
         
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<Location>()
         fetchRequest.entity = entity
         
-        locations = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Location]
+        locations = try! managedObjectContext.fetch(fetchRequest)
         
         mapView.addAnnotations(locations)
     }
     
-    func regionForAnnotations(annotations: [MKAnnotation])
+    func regionForAnnotations(_ annotations: [MKAnnotation])
         -> MKCoordinateRegion {
             var region: MKCoordinateRegion
             switch annotations.count { case 0:
@@ -391,41 +391,41 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
 
 extension ViewController: MKMapViewDelegate {
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard annotation is Location else {
             return nil
         }
         
         let identifier = "Location"
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as! MKPinAnnotationView!
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKPinAnnotationView!
         
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             
-            annotationView.enabled = true
-            annotationView.canShowCallout = true
-            annotationView.animatesDrop = false
-            annotationView.pinTintColor = UIColor(red: 0.32, green: 0.82, blue: 0.4, alpha: 1)
+            annotationView?.isEnabled = true
+            annotationView?.canShowCallout = true
+            annotationView?.animatesDrop = false
+            annotationView?.pinTintColor = UIColor(red: 0.32, green: 0.82, blue: 0.4, alpha: 1)
             
-            let rightButton = UIButton(type: .DetailDisclosure)
-            rightButton.addTarget(self, action: #selector(MapViewController.showLocationDetails(_:)), forControlEvents: .TouchUpInside)
+            let rightButton = UIButton(type: .detailDisclosure)
+            rightButton.addTarget(self, action: #selector(MapViewController.showLocationDetails(_:)), for: .touchUpInside)
             
-            annotationView.rightCalloutAccessoryView = rightButton
+            annotationView?.rightCalloutAccessoryView = rightButton
             
         } else {
-            annotationView.annotation = annotation
+            annotationView?.annotation = annotation
         }
         
-        let button = annotationView.rightCalloutAccessoryView as! UIButton
-        if let index = locations.indexOf(annotation as! Location) {
+        let button = annotationView?.rightCalloutAccessoryView as! UIButton
+        if let index = locations.index(of: annotation as! Location) {
             button.tag = index
         }
         
         return annotationView
     }
     
-    func showLocationDetails(sender: UIButton) {
-        performSegueWithIdentifier("EditMapLocation", sender: sender)
+    func showLocationDetails(_ sender: UIButton) {
+        performSegue(withIdentifier: "EditMapLocation", sender: sender)
     }
     
     
