@@ -10,6 +10,7 @@
 		DC15B8311CD1F88100C2309C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC15B8301CD1F88100C2309C /* ViewController.swift */; };
 		DC15B8331CD1F8D200C2309C /* DCtableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC15B8321CD1F8D200C2309C /* DCtableView.swift */; };
 		DC20E6621CE77E3200161479 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC20E6611CE77E3200161479 /* DetailViewController.swift */; };
+		DC2BB5CE1DE4D10100196C55 /* munich.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DC2BB5CD1DE4D10100196C55 /* munich.gpx */; };
 		DC3112741B45F1760084BDF3 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3112731B45F1760084BDF3 /* HudView.swift */; };
 		DC67086D1B3AD37300C6F17C /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67086C1B3AD37300C6F17C /* CategoryPickerViewController.swift */; };
 		DC68E1651B30C3CD00491237 /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68E1641B30C3CD00491237 /* LocationDetailsViewController.swift */; };
@@ -41,10 +42,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		DCB6F94C1DE61A6000F06F0E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		DC15B8301CD1F88100C2309C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DC15B8321CD1F8D200C2309C /* DCtableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCtableView.swift; sourceTree = "<group>"; };
 		DC20E6611CE77E3200161479 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		DC22B4DE1DEE073B00E3681A /* Placestar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Placestar.entitlements; sourceTree = "<group>"; };
+		DC2BB5CD1DE4D10100196C55 /* munich.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = munich.gpx; sourceTree = "<group>"; };
 		DC3112731B45F1760084BDF3 /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
 		DC67086C1B3AD37300C6F17C /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		DC68E1641B30C3CD00491237 /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +82,7 @@
 		DC88BD831BE299F600ABBA8B /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		DC95CB9B1CCFB04C00E8C207 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		DCB2F72A1C8CB02A00BCD66D /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationCell.swift; path = ../LocationCell.swift; sourceTree = "<group>"; };
+		DCB6F93D1DE61A6000F06F0E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		DCC51A0C1BB1B34B00A905CC /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataProperties.swift"; path = "../Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DCD5CC861CC82C4C0028953C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		DCD5CC881CC82CDB0028953C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -96,9 +113,11 @@
 		DC7D52351B274265002B3D0F = {
 			isa = PBXGroup;
 			children = (
+				DC2BB5CD1DE4D10100196C55 /* munich.gpx */,
 				DCD5CC861CC82C4C0028953C /* MapKit.framework */,
 				DC7D52401B274265002B3D0F /* Placestar */,
 				DC7D52581B274265002B3D0F /* PlacestarTests */,
+				DCB6F93C1DE61A6000F06F0E /* Frameworks */,
 				DC7D523F1B274265002B3D0F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -115,6 +134,7 @@
 		DC7D52401B274265002B3D0F /* Placestar */ = {
 			isa = PBXGroup;
 			children = (
+				DC22B4DE1DEE073B00E3681A /* Placestar.entitlements */,
 				DC7D52431B274265002B3D0F /* AppDelegate.swift */,
 				DC15B8301CD1F88100C2309C /* ViewController.swift */,
 				DC7D52451B274265002B3D0F /* CurrentLocationViewController.swift */,
@@ -165,6 +185,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DCB6F93C1DE61A6000F06F0E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCB6F93D1DE61A6000F06F0E /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -175,6 +203,7 @@
 				DC7D523A1B274265002B3D0F /* Sources */,
 				DC7D523B1B274265002B3D0F /* Frameworks */,
 				DC7D523C1B274265002B3D0F /* Resources */,
+				DCB6F94C1DE61A6000F06F0E /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -209,7 +238,7 @@
 		DC7D52361B274265002B3D0F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Felix Lösing";
 				TargetAttributes = {
@@ -217,6 +246,11 @@
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = C7H8ATK9UZ;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					DC7D52541B274265002B3D0F = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -254,6 +288,7 @@
 				DC765B491CE9EA9500C8EF69 /* Localizable.strings in Resources */,
 				DC7D52501B274265002B3D0F /* LaunchScreen.xib in Resources */,
 				DC7D524D1B274265002B3D0F /* Images.xcassets in Resources */,
+				DC2BB5CE1DE4D10100196C55 /* munich.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,10 +468,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Placestar/Placestar.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = C7H8ATK9UZ;
 				INFOPLIST_FILE = Placestar/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.floesing.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Placestar;
@@ -448,10 +484,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Placestar/Placestar.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = C7H8ATK9UZ;
 				INFOPLIST_FILE = Placestar/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.floesing.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Placestar;

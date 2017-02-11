@@ -433,12 +433,20 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
     }
     
     func showPhotoMenu() {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", value: "Cancel", comment: ""), style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("camera", value: "Camera", comment: ""), style: .default, handler: { _ in self.takePhotoWithCamera()}))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("photo-library", value: "Photo Library", comment: ""), style: .default, handler: { _ in self.choosePhotoFromLibrary()}))
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        present(alert, animated: true, completion: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let takePhotoAction = UIAlertAction(title: "Take Photo", style: .default, handler: { _ in self.takePhotoWithCamera() })
+        
+        alertController.addAction(takePhotoAction)
+        
+        let chooseFromLibraryAction = UIAlertAction(title: "Choose From Library", style: .default, handler: { _ in self.choosePhotoFromLibrary() })
+        
+        alertController.addAction(chooseFromLibraryAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     func showImage(_ image: UIImage) {
