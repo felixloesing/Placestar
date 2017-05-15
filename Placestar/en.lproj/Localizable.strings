@@ -69,3 +69,9 @@
 "city" = "City";
 
 "enter-name-here" = "enter name here…";
+
+"open-maps" = "Open Maps";
+
+"open-maps-prompt" = "Do you want to open the Maps App?";
+
+"yes" = "Yes";

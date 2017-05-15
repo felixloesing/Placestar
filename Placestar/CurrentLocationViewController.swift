@@ -248,7 +248,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
         
         //distance between last and current location
-        var distance = CLLocationDistance(DBL_MAX)
+        var distance = CLLocationDistance(Double.greatestFiniteMagnitude)
         if let location = location {
             distance = newLocation.distance(from: location)
         }

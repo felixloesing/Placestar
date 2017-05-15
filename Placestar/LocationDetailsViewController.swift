@@ -90,6 +90,8 @@ class LocationDetailsViewController: UITableViewController {
             let dropPin = MKPointAnnotation()
             dropPin.coordinate = pinLocation
             mapView.addAnnotation(dropPin)
+            
+
         }
         
         
@@ -124,6 +126,39 @@ class LocationDetailsViewController: UITableViewController {
         tableView.addGestureRecognizer(gestureRecognizer)
         tableView.backgroundView = nil
         tableView.backgroundColor = UIColor.white
+        
+        //mapView tap recognizer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.didTapMap(_:)))
+        mapView.addGestureRecognizer(tapGesture)
+        
+    }
+    
+    //open Apple Maps App when mapView is tapped
+    func didTapMap(_ sender: UITapGestureRecognizer) {
+        
+        let alert = UIAlertController(title: NSLocalizedString("open-maps", value: "Open Maps", comment: ""), message: NSLocalizedString("open-maps-prompt", value: "Do you want to open the Maps App?", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", value: "Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: nil))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("yes", value: "Yes", comment: ""), style: UIAlertActionStyle.default, handler: { action in
+            
+            if let location = self.locationToEdit {
+                let regionDistance:CLLocationDistance = 10000
+                let coordinates = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+                let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+                let options = [
+                    MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                    MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+                ]
+                let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                let mapItem = MKMapItem(placemark: placemark)
+                mapItem.name = self.descriptionText
+                mapItem.openInMaps(launchOptions: options)
+            }
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
     
@@ -273,6 +308,21 @@ class LocationDetailsViewController: UITableViewController {
             //self.presentViewController(vc, animated: true, completion: nil)
             
         })
+    }
+    
+    // get destination controller after save and update annotations on map
+    
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "unwindToPlacestar" {
+            let navController = segue.destination as? UINavigationController
+            
+            if let destinationViewController = navController?.topViewController as? ViewController {
+                destinationViewController.updateLocations()
+            }
+        }
     }
     
     @IBAction func cancel() {
