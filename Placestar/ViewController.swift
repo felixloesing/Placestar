@@ -88,6 +88,15 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         tableView.bounces = false
         button.layer.cornerRadius = 35
         
+        
+        button.layer.masksToBounds = false
+        
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.4
+        button.layer.shadowRadius = 1.5
+        button.layer.shadowOffset = CGSize(width: 2, height: 2)
+        
+        
         self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height+85, 0, 0, 0);
         
         let authStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
@@ -122,7 +131,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         super.viewDidAppear(animated)
         performFetch()
         tableView.reloadData()
-        showLocations()
+        //showLocations()
+        updateLocations()
     }
     
     func performFetch() {
@@ -197,6 +207,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             }
             performFetch()
             tableView.reloadData()
+            updateLocations()
         }
     }
  
@@ -335,6 +346,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     }
     
     @IBAction func showLocations() {
+        updateLocations()
         let region = regionForAnnotations(locations)
         mapView.setRegion(region, animated: true)
     }
