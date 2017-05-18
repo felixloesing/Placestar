@@ -23,16 +23,13 @@ private let dateFormatter: DateFormatter = {
 class LocationDetailsViewController: UITableViewController {
     
     @IBOutlet weak var descriptionTextView: UITextView!
-    
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var addPhotoLabel: UILabel!
-    
     @IBOutlet weak var mapView: MKMapView!
     
     
@@ -495,26 +492,25 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
         
         let chooseFromLibraryAction = UIAlertAction(title: NSLocalizedString("choose-from-library", value: "Choose From Library", comment: ""), style: .default, handler: { _ in self.choosePhotoFromLibrary() })
         
-        
         alertController.addAction(chooseFromLibraryAction)
         
-        let saveCurrentPhotoAction = UIAlertAction(title: NSLocalizedString("save-current-photo", value: "Save Current Photo", comment: ""), style: .default, handler: { _ in
-            if let saveImage = self.imageView.image {
+        
+        if imageView.image != nil {
             
-            UIImageWriteToSavedPhotosAlbum(saveImage, nil, nil, nil)
-            
-            let alert = UIAlertController(title: NSLocalizedString("success", value: "Success", comment: ""), message: NSLocalizedString("image-has-been-saved", value: "Image has been saved", comment: ""), preferredStyle: .alert)
-            let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
+            let saveCurrentPhotoAction = UIAlertAction(title: NSLocalizedString("save-current-photo", value: "Save Current Photo", comment: ""), style: .default, handler: { _ in
+                if let saveImage = self.imageView.image {
                 
-        } })
-        
-        
-        alertController.addAction(saveCurrentPhotoAction)
-        
-        
-
+                UIImageWriteToSavedPhotosAlbum(saveImage, nil, nil, nil)
+                
+                let alert = UIAlertController(title: NSLocalizedString("success", value: "Success", comment: ""), message: NSLocalizedString("image-has-been-saved", value: "Image has been saved", comment: ""), preferredStyle: .alert)
+                let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+                    
+            } })
+            alertController.addAction(saveCurrentPhotoAction)
+            
+        }
     
         present(alertController, animated: true, completion: nil)
     }
