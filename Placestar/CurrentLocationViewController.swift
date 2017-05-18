@@ -44,12 +44,12 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         
         getLocation()
         
-        tagButton.layer.cornerRadius = 15
-        latitudeLabel.layer.cornerRadius = 15
+        tagButton.layer.cornerRadius = 5
+        latitudeLabel.layer.cornerRadius = 5
         latitudeLabel.clipsToBounds = true
-        longitudeLabel.layer.cornerRadius = 15
+        longitudeLabel.layer.cornerRadius = 5
         longitudeLabel.clipsToBounds = true
-        addressLabel.layer.cornerRadius = 15
+        addressLabel.layer.cornerRadius = 5
         addressLabel.clipsToBounds = true
     }
     

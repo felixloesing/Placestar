@@ -26,9 +26,13 @@
 
 "photo-library" = "Fotoarchiv";
 
+"choose-from-library" = "aus Bibliothek wählen";
+
 "cancel" = "Abbrechen";
 
 "camera" = "Kamera";
+
+"save-current-photo" = "aktuelles Foto speichern";
 
 "(no-description)" = "(keine Beschreibung)";
 
@@ -38,7 +42,9 @@
 
 "museum" = "Museum";
 
-"store" = "Laden";
+"store" = "Geschäft";
+
+"take-photo" = "Foto aufnehmen";
 
 "bar" = "Bar";
 
@@ -75,3 +81,7 @@
 "open-maps-prompt" = "Möchtest Du die Karten App öffnen?";
 
 "yes" = "Ja";
+
+"success" = "Erfolg";
+
+"image-has-been-saved" = "Foto wurde gespeichert";

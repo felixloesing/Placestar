@@ -26,9 +26,13 @@
 
 "photo-library" = "Photo Library";
 
+"choose-from-library" = "Choose From Library";
+
 "cancel" = "Cancel";
 
 "camera" = "Camera";
+
+"save-current-photo" = "Save Current Photo";
 
 "(no-description)" = "(No Description)";
 
@@ -39,6 +43,8 @@
 "museum" = "Museum";
 
 "store" = "Store";
+
+"take-photo" = "Take Photo";
 
 "bar" = "Bar";
 
@@ -75,3 +81,7 @@
 "open-maps-prompt" = "Do you want to open the Maps App?";
 
 "yes" = "Yes";
+
+"success" = "Success";
+
+"image-has-been-saved" = "Image has been saved";

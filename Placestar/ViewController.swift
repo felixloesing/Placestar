@@ -45,6 +45,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     var alert: UIAlertController!
     
+    var startup = true
+    
     
     lazy var fetchedResultsController: NSFetchedResultsController<Location> = {
         let fetchRequest = NSFetchRequest<Location>()
@@ -85,7 +87,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         
         print("ViewController *** \(managedObjectContext)")
         
-        tableView.bounces = false
+        tableView.bounces = true
+        tableView.alwaysBounceVertical = true
+        
         button.layer.cornerRadius = 35
         
         
@@ -97,7 +101,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         button.layer.shadowOffset = CGSize(width: 2, height: 2)
         
         
-        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height+85, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height+55, 0, 0, 0);
         
         let authStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
@@ -115,6 +119,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         if !locations.isEmpty {
             showLocations()
         }
+
         
     }
     
@@ -123,7 +128,11 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         print("appeared")
         //self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-80, 0, 0, 0);
         performFetch()
+        
+        
+        
         tableView.reloadData()
+        
         
     }
     
@@ -133,6 +142,12 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         tableView.reloadData()
         //showLocations()
         updateLocations()
+        
+        if startup == true {
+            startup = false
+            showLocations()
+        }
+        
     }
     
     func performFetch() {
@@ -265,7 +280,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         print("++++++++++++++++++viewDidLayoutSubviews")
-        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-75, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-65, 0, 0, 0);
+        self.tableView.contentOffset.y = -290
     }
 
 
@@ -273,6 +289,13 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView.contentOffset.y < self.mapView.frame.size.height * -1 ) {
             scrollView .setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: self.mapView.frame.size.height * -1), animated: true)
+        }
+        
+        if (scrollView.contentOffset.y <= -290)
+        {
+            var offset = scrollView.contentOffset
+            offset.y = -290
+            scrollView.contentOffset = offset
         }
     }
 

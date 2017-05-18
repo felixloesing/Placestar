@@ -485,17 +485,37 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
     func showPhotoMenu() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", value: "Cancel", comment: ""), style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
-        let takePhotoAction = UIAlertAction(title: "Take Photo", style: .default, handler: { _ in self.takePhotoWithCamera() })
+        
+        let takePhotoAction = UIAlertAction(title: NSLocalizedString("take-photo", value: "Take Photo", comment: ""), style: .default, handler: { _ in self.takePhotoWithCamera() })
         
         alertController.addAction(takePhotoAction)
         
-        let chooseFromLibraryAction = UIAlertAction(title: "Choose From Library", style: .default, handler: { _ in self.choosePhotoFromLibrary() })
+        let chooseFromLibraryAction = UIAlertAction(title: NSLocalizedString("choose-from-library", value: "Choose From Library", comment: ""), style: .default, handler: { _ in self.choosePhotoFromLibrary() })
+        
         
         alertController.addAction(chooseFromLibraryAction)
         
+        let saveCurrentPhotoAction = UIAlertAction(title: NSLocalizedString("save-current-photo", value: "Save Current Photo", comment: ""), style: .default, handler: { _ in
+            if let saveImage = self.imageView.image {
+            
+            UIImageWriteToSavedPhotosAlbum(saveImage, nil, nil, nil)
+            
+            let alert = UIAlertController(title: NSLocalizedString("success", value: "Success", comment: ""), message: NSLocalizedString("image-has-been-saved", value: "Image has been saved", comment: ""), preferredStyle: .alert)
+            let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+                
+        } })
+        
+        
+        alertController.addAction(saveCurrentPhotoAction)
+        
+        
+
+    
         present(alertController, animated: true, completion: nil)
     }
     
