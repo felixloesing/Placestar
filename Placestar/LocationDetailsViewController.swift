@@ -68,9 +68,7 @@ class LocationDetailsViewController: UITableViewController {
         super.viewDidLoad()
         
         
-        
         if let location = locationToEdit {
-            //title = "\(location.locationDescription)"
             title = ""
             
             if location.hasPhoto {
@@ -128,6 +126,13 @@ class LocationDetailsViewController: UITableViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.didTapMap(_:)))
         mapView.addGestureRecognizer(tapGesture)
         
+    }
+    
+    //dismiss view by overdragging table view
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y <= -110) {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     //open Apple Maps App when mapView is tapped
@@ -433,7 +438,6 @@ extension LocationDetailsViewController: UITextViewDelegate {
             textView.text = ""
         }
     }
-    
 }
 
 extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -495,6 +499,7 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
         alertController.addAction(chooseFromLibraryAction)
         
         
+        //option to save an existing image to camera roll
         if imageView.image != nil {
             
             let saveCurrentPhotoAction = UIAlertAction(title: NSLocalizedString("save-current-photo", value: "Save Current Photo", comment: ""), style: .default, handler: { _ in
