@@ -17,31 +17,13 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
 
     
     @IBOutlet weak var tableView: DCtableView!
-    
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var button: UIButton!
     
     let locationManager = CLLocationManager()
     
-    /*
-    
-    var managedObjectContext: NSManagedObjectContext! {
-        didSet {
-            NSNotificationCenter.defaultCenter().addObserverForName(NSManagedObjectContextObjectsDidChangeNotification, object:         self.managedObjectContext, queue: NSOperationQueue.mainQueue()) { (notification) in
-                if self.isViewLoaded() {
-                    self.updateLocations()
-                    self.performFetch()
-                }
-            }
-        }
-    }
- 
-    */
-    
     var managedObjectContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
 
-    
     
     var alert: UIAlertController!
     
@@ -77,8 +59,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
         performFetch()
         
         self.tableView.backgroundColor = UIColor.clear
@@ -91,10 +71,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         tableView.alwaysBounceVertical = true
         
         button.layer.cornerRadius = 35
-        
-        
         button.layer.masksToBounds = false
-        
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.4
         button.layer.shadowRadius = 1.5
@@ -127,11 +104,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         super.viewWillAppear(animated)
         print("appeared")
         //self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-80, 0, 0, 0);
-        performFetch()
         
-        
-        
-        tableView.reloadData()
+        //performFetch()
+        //tableView.reloadData()
         
         
     }
@@ -201,8 +176,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 57.0
     }
-    
-    
     
     
     

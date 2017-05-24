@@ -442,8 +442,10 @@ extension LocationDetailsViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
-        //make textview visible above keyboard
-        tableView.contentOffset.y = 200
+        //make textview visible above keyboard with animation
+        UIView.animate(withDuration: 0.2) { 
+            self.tableView.contentOffset.y = 200
+        }
         
         descriptionTextView.font = UIFont.boldSystemFont(ofSize: descriptionTextView.font!.pointSize)
         descriptionTextView.textColor = UIColor.black
