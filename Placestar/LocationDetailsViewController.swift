@@ -67,6 +67,7 @@ class LocationDetailsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        descriptionTextView.delegate = self
         
         if let location = locationToEdit {
             title = ""
@@ -349,6 +350,7 @@ class LocationDetailsViewController: UITableViewController {
         categoryLabel.text = categoryName
     }
     
+    
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -362,7 +364,7 @@ class LocationDetailsViewController: UITableViewController {
             return 88
             
         case (1, 2):
-            return 115
+            return 220
             
         case(2, 2):
             
@@ -419,8 +421,16 @@ class LocationDetailsViewController: UITableViewController {
 
 extension LocationDetailsViewController: UITextViewDelegate {
     
+    
     //saving text to descriptionText
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        //make textview single-lined and hide keyboard with done button
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        
         descriptionText = (textView.text as NSString).replacingCharacters(in: range, with: text)
 
         return true
@@ -431,6 +441,10 @@ extension LocationDetailsViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        //make textview visible above keyboard
+        tableView.contentOffset.y = 200
+        
         descriptionTextView.font = UIFont.boldSystemFont(ofSize: descriptionTextView.font!.pointSize)
         descriptionTextView.textColor = UIColor.black
         

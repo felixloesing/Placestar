@@ -346,7 +346,7 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" keyboardDismissMode="onDrag" text="enter name here…" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UMx-hV-L9p">
                                                     <rect key="frame" x="15" y="10" width="345" height="67"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="TgE-Mr-cTL" id="9Ii-xO-FEa"/>
                                                     </connections>
@@ -387,22 +387,26 @@
                                             <segue destination="1tc-t5-IOl" kind="push" identifier="PickCategory" id="3qD-FX-5sa"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="116" id="5CF-X0-PDd">
-                                        <rect key="frame" x="0.0" y="247" width="375" height="116"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="220" id="5CF-X0-PDd">
+                                        <rect key="frame" x="0.0" y="247" width="375" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5CF-X0-PDd" id="7Tu-kO-Wl1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="116"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNo-kS-BGO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="375" id="dH2-2e-L1w"/>
+                                                        <constraint firstAttribute="height" constant="220" id="zde-HV-cWq"/>
+                                                    </constraints>
                                                 </mapView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="nNo-kS-BGO" firstAttribute="top" secondItem="7Tu-kO-Wl1" secondAttribute="top" id="3L8-fH-KLS"/>
                                                 <constraint firstAttribute="trailing" secondItem="nNo-kS-BGO" secondAttribute="trailing" id="PCM-GR-xty"/>
                                                 <constraint firstItem="nNo-kS-BGO" firstAttribute="leading" secondItem="7Tu-kO-Wl1" secondAttribute="leading" id="v8A-xx-UDB"/>
-                                                <constraint firstAttribute="bottom" secondItem="nNo-kS-BGO" secondAttribute="bottom" id="yZE-RO-DgE"/>
+                                                <constraint firstAttribute="bottom" secondItem="nNo-kS-BGO" secondAttribute="bottom" constant="-1" id="yZE-RO-DgE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -411,7 +415,7 @@
                             <tableViewSection id="VQr-Lj-Q4K">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="oVW-jn-bHO" detailTextLabel="Efv-an-NLU" style="IBUITableViewCellStyleValue1" id="HuW-vx-q1E">
-                                        <rect key="frame" x="0.0" y="399" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="503" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HuW-vx-q1E" id="MX2-vy-PAP">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -435,7 +439,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="8ip-Hq-Vf6" detailTextLabel="VS4-Bq-E74" style="IBUITableViewCellStyleValue1" id="sg0-aj-2ap">
-                                        <rect key="frame" x="0.0" y="443" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="547" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sg0-aj-2ap" id="D1Q-1d-OHB">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -459,7 +463,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="BqS-g3-c6j">
-                                        <rect key="frame" x="0.0" y="487" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="591" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="BqS-g3-c6j" id="tiB-Wk-rag">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -490,7 +494,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="PH8-Ji-tvd" detailTextLabel="iVw-3D-sgG" style="IBUITableViewCellStyleValue1" id="IE7-Xn-Lso">
-                                        <rect key="frame" x="0.0" y="531" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="635" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IE7-Xn-Lso" id="FL3-7W-Wa5">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
