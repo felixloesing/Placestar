@@ -58,9 +58,10 @@ class LocationCell: UITableViewCell {
     
     func imageForLocation(_ location: Location) -> UIImage {
         if location.hasPhoto, let image = location.photoImage {
-            return image.resizedImageWithBounds(CGSize(width: 52, height: 52))
+            return image
+            //.resizedImageWithBounds(CGSize(width: 52, height: 52))
         }
-        return UIImage(named: "No Photo")!
+        return UIImage(named: "NoPhoto")!
     }
 
 }

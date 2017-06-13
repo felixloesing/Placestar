@@ -173,6 +173,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         return cell
     }
     
+
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 57.0
     }
