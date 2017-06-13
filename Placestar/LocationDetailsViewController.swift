@@ -69,6 +69,9 @@ class LocationDetailsViewController: UITableViewController {
         
         descriptionTextView.delegate = self
         
+        
+
+        
         if let location = locationToEdit {
             title = ""
             
@@ -88,6 +91,8 @@ class LocationDetailsViewController: UITableViewController {
             mapView.addAnnotation(dropPin)
             
 
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
         }
         
         
@@ -130,10 +135,20 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     //dismiss view by overdragging table view
+    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (scrollView.contentOffset.y <= -110) {
-            dismiss(animated: true, completion: nil)
+        
+        if locationToEdit != nil {
+        
+            if (scrollView.contentOffset.y <= -110) {
+                dismiss(animated: true, completion: nil)
+            }
+            
         }
+    }
+    
+    func cancelTapped() {
+        self.performSegue(withIdentifier: "unwindToPlacestar", sender: self)
     }
     
     //open Apple Maps App when mapView is tapped

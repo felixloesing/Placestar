@@ -53,6 +53,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         addressLabel.clipsToBounds = true
     }
     
+    
     @IBAction func refreshButton(_ sender: AnyObject) {
         if updatingLocation {
             stopLocationManager()
