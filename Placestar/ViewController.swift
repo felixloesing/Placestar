@@ -107,8 +107,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         
         //performFetch()
         //tableView.reloadData()
-        
-        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -120,7 +119,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         
         if startup == true {
             startup = false
-            showLocations()
+            updateLocations()
+            let region = regionForAnnotations(locations)
+            mapView.setRegion(region, animated: false)
         }
         
     }
