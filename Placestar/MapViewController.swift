@@ -136,7 +136,7 @@ extension MapViewController: MKMapViewDelegate {
         return annotationView
     }
     
-    func showLocationDetails(_ sender: UIButton) {
+    @objc func showLocationDetails(_ sender: UIButton) {
         performSegue(withIdentifier: "EditLocation", sender: sender)
     }
     

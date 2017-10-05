@@ -209,7 +209,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         return line1 + "\n" + line2
     }
     
-    func didTimeOut() {
+    @objc func didTimeOut() {
         print("*** time out ***")
         
         if location == nil {

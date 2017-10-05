@@ -149,12 +149,12 @@ class LocationDetailsViewController: UITableViewController {
         }
     }
     
-    func cancelTapped() {
+    @objc func cancelTapped() {
         self.performSegue(withIdentifier: "unwindToPlacestar", sender: self)
     }
     
     //open Apple Maps App when mapView is tapped
-    func didTapMap(_ sender: UITapGestureRecognizer) {
+    @objc func didTapMap(_ sender: UITapGestureRecognizer) {
         
         let alert = UIAlertController(title: NSLocalizedString("open-maps", value: "Open Maps", comment: ""), message: NSLocalizedString("open-maps-prompt", value: "Do you want to open the Maps App?", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
         
@@ -209,7 +209,7 @@ class LocationDetailsViewController: UITableViewController {
         descriptionTextView.frame.size.width = view.frame.size.width - 30
     }
     
-    func dismissKeyboard(_ gestureReconizer: UIGestureRecognizer) {
+    @objc func dismissKeyboard(_ gestureReconizer: UIGestureRecognizer) {
         //create indexpath from CGpoint value of the tap
         let point = gestureReconizer.location(in: tableView)
         let indexPath = tableView.indexPathForRow(at: point)
@@ -460,8 +460,12 @@ extension LocationDetailsViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         
         //make textview visible above keyboard with animation
-        UIView.animate(withDuration: 0.2) { 
-            self.tableView.contentOffset.y = 200
+        
+        if image != nil {
+            UIView.animate(withDuration: 0.2) {
+                self.tableView.contentOffset.y = 200
+                
+            }
         }
         
         descriptionTextView.font = UIFont.boldSystemFont(ofSize: descriptionTextView.font!.pointSize)

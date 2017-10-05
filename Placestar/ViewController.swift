@@ -403,39 +403,83 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
 extension ViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is Location else {
-            return nil
-        }
-        
-        let identifier = "Location"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKPinAnnotationView!
-        
-        if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        if #available(iOS 11.0, *) {
             
-            annotationView?.isEnabled = true
-            annotationView?.canShowCallout = true
-            annotationView?.animatesDrop = false
-            annotationView?.pinTintColor = UIColor(red: 0.32, green: 0.82, blue: 0.4, alpha: 1)
+            guard annotation is Location else {
+                return nil
+            }
             
-            let rightButton = UIButton(type: .detailDisclosure)
-            rightButton.addTarget(self, action: #selector(MapViewController.showLocationDetails(_:)), for: .touchUpInside)
+            let identifier = "Location"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKMarkerAnnotationView!
             
-            annotationView?.rightCalloutAccessoryView = rightButton
+            if annotationView == nil {
+                annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                
+                annotationView?.isEnabled = true
+                annotationView?.canShowCallout = true
+                annotationView?.animatesWhenAdded = false
+                annotationView?.markerTintColor = UIColor(red:0.13, green:0.82, blue:0.17, alpha:1.0)
+                //                red: 0.32, green: 0.82, blue: 0.4, alpha: 1)
+                annotationView?.displayPriority = MKFeatureDisplayPriority.required
+                
+                let rightButton = UIButton(type: .detailDisclosure)
+                rightButton.addTarget(self, action: #selector(ViewController.showLocationDetails(_:)), for: .touchUpInside)
+                
+                annotationView?.rightCalloutAccessoryView = rightButton
+                
+            } else {
+                annotationView?.annotation = annotation
+            }
+            
+            let button = annotationView?.rightCalloutAccessoryView as! UIButton
+            if let index = locations.index(of: annotation as! Location) {
+                button.tag = index
+            }
+            
+            return annotationView
+            
             
         } else {
-            annotationView?.annotation = annotation
+            // Fallback on earlier versions
+            
+            
+            guard annotation is Location else {
+                return nil
+            }
+            
+            let identifier = "Location"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKPinAnnotationView!
+            
+            if annotationView == nil {
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                
+                annotationView?.isEnabled = true
+                annotationView?.canShowCallout = true
+                annotationView?.animatesDrop = false
+                annotationView?.pinTintColor = UIColor(red: 0.32, green: 0.82, blue: 0.4, alpha: 1)
+                
+                let rightButton = UIButton(type: .detailDisclosure)
+                rightButton.addTarget(self, action: #selector(MapViewController.showLocationDetails(_:)), for: .touchUpInside)
+                
+                annotationView?.rightCalloutAccessoryView = rightButton
+                
+            } else {
+                annotationView?.annotation = annotation
+            }
+            
+            let button = annotationView?.rightCalloutAccessoryView as! UIButton
+            if let index = locations.index(of: annotation as! Location) {
+                button.tag = index
+            }
+            
+            return annotationView
+            
+        
         }
         
-        let button = annotationView?.rightCalloutAccessoryView as! UIButton
-        if let index = locations.index(of: annotation as! Location) {
-            button.tag = index
-        }
-        
-        return annotationView
     }
     
-    func showLocationDetails(_ sender: UIButton) {
+    @objc func showLocationDetails(_ sender: UIButton) {
         performSegue(withIdentifier: "EditMapLocation", sender: sender)
     }
     
