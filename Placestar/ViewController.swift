@@ -41,7 +41,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         let sortDescriptor2 = NSSortDescriptor(key: "date", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor2, sortDescriptor1]
         
-        fetchRequest.fetchBatchSize = 22
+        fetchRequest.fetchBatchSize = 55
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: "Locations")
         
@@ -256,7 +256,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         print("++++++++++++++++++viewDidLayoutSubviews")
-        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-65, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-88, 0, 0, 0);
         self.tableView.contentOffset.y = -290
     }
 
