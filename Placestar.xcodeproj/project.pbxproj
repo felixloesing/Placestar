@@ -11,6 +11,7 @@
 		DC15B8331CD1F8D200C2309C /* DCtableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC15B8321CD1F8D200C2309C /* DCtableView.swift */; };
 		DC20E6621CE77E3200161479 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC20E6611CE77E3200161479 /* DetailViewController.swift */; };
 		DC2BB5CE1DE4D10100196C55 /* munich.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DC2BB5CD1DE4D10100196C55 /* munich.gpx */; };
+		DC2E15B21FB255F30053920A /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E15B11FB255F30053920A /* UIDevice+modelName.swift */; };
 		DC3112741B45F1760084BDF3 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3112731B45F1760084BDF3 /* HudView.swift */; };
 		DC67086D1B3AD37300C6F17C /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67086C1B3AD37300C6F17C /* CategoryPickerViewController.swift */; };
 		DC68E1651B30C3CD00491237 /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68E1641B30C3CD00491237 /* LocationDetailsViewController.swift */; };
@@ -61,6 +62,7 @@
 		DC20E6611CE77E3200161479 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DC22B4DE1DEE073B00E3681A /* Placestar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Placestar.entitlements; sourceTree = "<group>"; };
 		DC2BB5CD1DE4D10100196C55 /* munich.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = munich.gpx; sourceTree = "<group>"; };
+		DC2E15B11FB255F30053920A /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		DC3112731B45F1760084BDF3 /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
 		DC67086C1B3AD37300C6F17C /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		DC68E1641B30C3CD00491237 /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				DC67086C1B3AD37300C6F17C /* CategoryPickerViewController.swift */,
 				DCB2F72A1C8CB02A00BCD66D /* LocationCell.swift */,
 				DC95CB9B1CCFB04C00E8C207 /* UIImage+Resize.swift */,
+				DC2E15B11FB255F30053920A /* UIDevice+modelName.swift */,
 				DCD5CC881CC82CDB0028953C /* MapViewController.swift */,
 				DC15B8321CD1F8D200C2309C /* DCtableView.swift */,
 				DC20E6611CE77E3200161479 /* DetailViewController.swift */,
@@ -314,6 +317,7 @@
 				DC88BD841BE299F600ABBA8B /* LocationsViewController.swift in Sources */,
 				DC15B8331CD1F8D200C2309C /* DCtableView.swift in Sources */,
 				DCC51A0D1BB1B34B00A905CC /* Location+CoreDataProperties.swift in Sources */,
+				DC2E15B21FB255F30053920A /* UIDevice+modelName.swift in Sources */,
 				DCD5CC891CC82CDB0028953C /* MapViewController.swift in Sources */,
 				DC95CB9C1CCFB04C00E8C207 /* UIImage+Resize.swift in Sources */,
 				DCB2F72B1C8CB02A00BCD66D /* LocationCell.swift in Sources */,

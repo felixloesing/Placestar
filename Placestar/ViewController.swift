@@ -77,8 +77,11 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         button.layer.shadowRadius = 1.5
         button.layer.shadowOffset = CGSize(width: 2, height: 2)
         
-        
-        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height+55, 0, 0, 0);
+        if UIDevice.current.modelName == "iPhone X" {
+            self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height+50, 0, 0, 0);
+        } else {
+            self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height+30, 0, 0, 0);
+        }
         
         let authStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
@@ -256,7 +259,13 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         print("++++++++++++++++++viewDidLayoutSubviews")
-        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-88, 0, 0, 0);
+        
+        if UIDevice.current.modelName == "iPhone X" {
+            self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-88, 0, 0, 0);
+        } else {
+            self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-65, 0, 0, 0);
+        }
+        
         self.tableView.contentOffset.y = -290
     }
 
@@ -473,15 +482,11 @@ extension ViewController: MKMapViewDelegate {
             }
             
             return annotationView
-            
-        
         }
-        
     }
     
     @objc func showLocationDetails(_ sender: UIButton) {
         performSegue(withIdentifier: "EditMapLocation", sender: sender)
     }
-    
-    
+
 }

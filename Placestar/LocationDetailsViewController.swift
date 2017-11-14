@@ -354,6 +354,9 @@ class LocationDetailsViewController: UITableViewController {
         if segue.identifier == "PickCategory" {
             let controller = segue.destination as! CategoryPickerViewController
             controller.selectedCategoryName = categoryName
+            
+            let indexPath = IndexPath(row: 1, section: 1)
+            tableView.deselectRow(at: indexPath, animated: true)
         } else if segue.identifier == "backHome" {
             //let controller = segue.destinationViewController as! ViewController
             //controller.managedObjectContext = managedObjectContext
