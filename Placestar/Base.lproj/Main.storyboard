@@ -78,7 +78,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1K-BK-erY">
-                                <rect key="frame" x="290" y="582" width="70" height="70"/>
+                                <rect key="frame" x="226.5" y="582" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.98372316360473633" green="0.0" blue="0.026953212916851044" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="WN1-tl-kHB"/>

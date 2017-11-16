@@ -274,6 +274,11 @@ class LocationDetailsViewController: UITableViewController {
             descriptionTextView.text = ""
         }
         
+        if descriptionTextView.text == NSLocalizedString("enter-name-here", value: "enter name here…", comment: "") {
+            descriptionText = ""
+            descriptionTextView.text = ""
+        }
+        
         print("Description: \(descriptionText)")
         
         
