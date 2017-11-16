@@ -106,7 +106,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("appeared")
-        //self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-80, 0, 0, 0);
         
         //performFetch()
         //tableView.reloadData()
@@ -266,7 +265,12 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-65, 0, 0, 0);
         }
         
-        self.tableView.contentOffset.y = -290
+        //      iPhone X = 235; rest = 290
+        if UIDevice.current.modelName == "iPhone X" {
+            self.tableView.contentOffset.y = -235
+        } else {
+            self.tableView.contentOffset.y = -290
+        }
     }
 
 
@@ -276,11 +280,18 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             scrollView .setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: self.mapView.frame.size.height * -1), animated: true)
         }
         
-        if (scrollView.contentOffset.y <= -290)
-        {
-            var offset = scrollView.contentOffset
-            offset.y = -290
-            scrollView.contentOffset = offset
+        if UIDevice.current.modelName == "iPhone X" {
+            if (scrollView.contentOffset.y <= -235) {
+                var offset = scrollView.contentOffset
+                offset.y = -235
+                scrollView.contentOffset = offset
+            }
+        } else {
+            if (scrollView.contentOffset.y <= -235) {
+                var offset = scrollView.contentOffset
+                offset.y = -235
+                scrollView.contentOffset = offset
+            }
         }
     }
 

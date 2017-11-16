@@ -52,7 +52,11 @@ class LocationDetailsViewController: UITableViewController {
     var locationToEdit: Location? {
         didSet {
             if let location = locationToEdit {
-                descriptionText = location.locationDescription
+                if location.locationDescription == "" {
+                    descriptionText = NSLocalizedString("enter-name-here", value: "enter name here…", comment: "")
+                } else {
+                    descriptionText = location.locationDescription
+                }
                 categoryName = location.category
                 date = location.date as Date
                 coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
@@ -94,7 +98,12 @@ class LocationDetailsViewController: UITableViewController {
         } else {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
             
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(done))
+            let saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(done))
+            let font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
+            saveBarButton.setTitleTextAttributes([NSAttributedStringKey.font:font], for: .normal)
+            
+            
+            navigationItem.rightBarButtonItem = saveBarButton
         }
         
         
@@ -142,7 +151,7 @@ class LocationDetailsViewController: UITableViewController {
         
         if locationToEdit != nil {
         
-            if (scrollView.contentOffset.y <= -110) {
+            if (scrollView.contentOffset.y <= -120) {
                 dismiss(animated: true, completion: nil)
             }
             
@@ -458,13 +467,19 @@ extension LocationDetailsViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         descriptionText = textView.text
+        
+        if descriptionTextView.text == "" {
+            descriptionTextView.font = UIFont.italicSystemFont(ofSize: descriptionTextView.font!.pointSize)
+            descriptionTextView.textColor = UIColor.gray
+            descriptionTextView.text = NSLocalizedString("enter-name-here", value: "enter name here…", comment: "")
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
         //make textview visible above keyboard with animation
         
-        if image != nil {
+        if imageView.image != nil {
             UIView.animate(withDuration: 0.2) {
                 self.tableView.contentOffset.y = 200
                 
@@ -508,6 +523,7 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
             showImage(image)
         }
         tableView.reloadData()
+        self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
         dismiss(animated: true, completion: nil)
     }
     
