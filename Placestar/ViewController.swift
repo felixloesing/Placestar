@@ -430,7 +430,7 @@ extension ViewController: MKMapViewDelegate {
             }
             
             let identifier = "Location"
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKMarkerAnnotationView!
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKMarkerAnnotationView?
             
             if annotationView == nil {
                 annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
@@ -468,7 +468,7 @@ extension ViewController: MKMapViewDelegate {
             }
             
             let identifier = "Location"
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKPinAnnotationView!
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKPinAnnotationView?
             
             if annotationView == nil {
                 annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
