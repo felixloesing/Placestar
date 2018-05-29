@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/Felix/Desktop/Placestar/Placestar.xcodeproj">
+      location = "group:/Users/Felix/Documents/Placestar/Placestar/README.md">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
