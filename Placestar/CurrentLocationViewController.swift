@@ -38,9 +38,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        print("CurrentLocationViewController1 *** \(managedObjectContext)")
         
         getLocation()
         
@@ -313,8 +310,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             let navigationController = segue.destination as! UINavigationController
             
             let controller = navigationController.topViewController as! LocationDetailsViewController
-            
-            print("CurrentLocationViewController *** \(managedObjectContext)")
             
             controller.coordinate = location!.coordinate
             controller.placemark = placemark

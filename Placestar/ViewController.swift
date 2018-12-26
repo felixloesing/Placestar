@@ -65,8 +65,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        print("ViewController *** \(managedObjectContext)")
-        
         tableView.bounces = true
         tableView.alwaysBounceVertical = true
         
@@ -233,8 +231,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
  
 
         } else if segue.identifier == "add" {
-            
-            print("CurrentLocationViewController *** \(managedObjectContext)")
             
             let controller = (segue.destination as! CurrentLocationViewController)
             controller.managedObjectContext = self.managedObjectContext
