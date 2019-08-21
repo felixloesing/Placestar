@@ -34,7 +34,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-40, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height-40, left: 0, bottom: 0, right: 0);
     }
     
     

@@ -82,11 +82,11 @@ class LocationDetailsViewController: UITableViewController {
             if location.hasPhoto {
                 if let image = location.photoImage {
                     showImage(image)
-                    self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
+                    self.tableView.contentInset = UIEdgeInsets.init(top: -36, left: 0, bottom: 0, right: 0)
                 }
             }
             
-            let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(location.latitude, location.longitude), 1000, 1000)
+            let region = MKCoordinateRegion.init(center: CLLocationCoordinate2DMake(location.latitude, location.longitude), latitudinalMeters: 1000, longitudinalMeters: 1000)
             mapView.setRegion(mapView.regionThatFits(region), animated: true)
             let pinLocation = CLLocationCoordinate2DMake(location.latitude, location.longitude)
             // Drop a pin
@@ -100,7 +100,7 @@ class LocationDetailsViewController: UITableViewController {
             
             let saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(done))
             let font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
-            saveBarButton.setTitleTextAttributes([NSAttributedStringKey.font:font], for: .normal)
+            saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font:font], for: .normal)
             
             
             navigationItem.rightBarButtonItem = saveBarButton
@@ -114,7 +114,7 @@ class LocationDetailsViewController: UITableViewController {
         latitudeLabel.text = String(format: "%.8f", coordinate.latitude)
         
         
-        let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), 1000, 1000)
+        let region = MKCoordinateRegion.init(center: CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(mapView.regionThatFits(region), animated: true)
         
         let pinLocation = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
@@ -165,16 +165,16 @@ class LocationDetailsViewController: UITableViewController {
     //open Apple Maps App when mapView is tapped
     @objc func didTapMap(_ sender: UITapGestureRecognizer) {
         
-        let alert = UIAlertController(title: NSLocalizedString("open-maps", value: "Open Maps", comment: ""), message: NSLocalizedString("open-maps-prompt", value: "Do you want to open the Maps App?", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: NSLocalizedString("open-maps", value: "Open Maps", comment: ""), message: NSLocalizedString("open-maps-prompt", value: "Do you want to open the Maps App?", comment: ""), preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", value: "Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", value: "Cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil))
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("yes", value: "Yes", comment: ""), style: UIAlertActionStyle.default, handler: { action in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("yes", value: "Yes", comment: ""), style: UIAlertAction.Style.default, handler: { action in
             
             if let location = self.locationToEdit {
                 let regionDistance:CLLocationDistance = 10000
                 let coordinates = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-                let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+                let regionSpan = MKCoordinateRegion.init(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
                 let options = [
                     MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
                     MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
@@ -314,7 +314,7 @@ class LocationDetailsViewController: UITableViewController {
                 location.photoID = Location.nextPhotoID() as NSNumber?
             }
             
-            if let data = UIImageJPEGRepresentation(image, 0.6) {
+            if let data = image.jpegData(compressionQuality: 0.6) {
                 
                 do {
                     try data.write(to: URL(fileURLWithPath: location.photoPath), options: .atomic)
@@ -438,7 +438,7 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     func listenForBackgroundNotification() {
-        observer = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: OperationQueue.main) { [weak self] _ in
+        observer = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
             
             if let strongSelf = self {
             
@@ -520,15 +520,18 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
         present(imagePicker, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
-        image = info[UIImagePickerControllerEditedImage] as? UIImage
+        image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage
         
         if let image = image {
             showImage(image)
         }
         tableView.reloadData()
-        self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0)
+        self.tableView.contentInset = UIEdgeInsets.init(top: -36, left: 0, bottom: 0, right: 0)
         dismiss(animated: true, completion: nil)
     }
     
@@ -590,3 +593,13 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
 }
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
+}

@@ -89,9 +89,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     
     func showLocationServicesDeniedAlert() {
-        let alert = UIAlertController(title: NSLocalizedString("location-services-title", value: "Location Service disabled", comment: "Location service title"), message: NSLocalizedString("location-services-message", value: "Please enable Location Services in Settings.", comment: "Location service message"), preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: NSLocalizedString("location-services-title", value: "Location Service disabled", comment: "Location service title"), message: NSLocalizedString("location-services-message", value: "Please enable Location Services in Settings.", comment: "Location service message"), preferredStyle: UIAlertController.Style.alert)
         
-        let alertAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil)
+        let alertAction = UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil)
         alert.addAction(alertAction)
         
         present(alert, animated: true, completion: nil)

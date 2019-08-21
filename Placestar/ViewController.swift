@@ -76,9 +76,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         button.layer.shadowOffset = CGSize(width: 2, height: 2)
         
         if UIDevice.current.modelName == "iPhone X" {
-            self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height+50, 0, 0, 0);
+            self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height+50, left: 0, bottom: 0, right: 0);
         } else {
-            self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height+30, 0, 0, 0);
+            self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height+30, left: 0, bottom: 0, right: 0);
         }
         
         let authStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
@@ -183,7 +183,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     
     // Override to support editing the table view.
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             let location = fetchedResultsController.object(at: indexPath)
@@ -256,9 +256,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         print("++++++++++++++++++viewDidLayoutSubviews")
         
         if UIDevice.current.modelName == "iPhone X" {
-            self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-88, 0, 0, 0);
+            self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height-88, left: 0, bottom: 0, right: 0);
         } else {
-            self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-65, 0, 0, 0);
+            self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height-65, left: 0, bottom: 0, right: 0);
         }
         
         //      iPhone X = 235; rest = 290
@@ -356,7 +356,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     var locations = [Location]()
     
     @IBAction func showUser() {
-        let region = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 1000, 1000)
+        let region = MKCoordinateRegion.init(center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(mapView.regionThatFits(region), animated: true)
     }
     
@@ -383,10 +383,10 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         -> MKCoordinateRegion {
             var region: MKCoordinateRegion
             switch annotations.count { case 0:
-                region = MKCoordinateRegionMakeWithDistance( mapView.userLocation.coordinate, 1000, 1000)
+                region = MKCoordinateRegion.init( center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
             case 1:
                 let annotation = annotations[annotations.count - 1]
-                region = MKCoordinateRegionMakeWithDistance(annotation.coordinate, 1000, 1000)
+                region = MKCoordinateRegion.init(center: annotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
             default:
                 var topLeftCoord = CLLocationCoordinate2D(latitude: -90,
                                                           longitude: 180)
@@ -448,7 +448,7 @@ extension ViewController: MKMapViewDelegate {
             }
             
             let button = annotationView?.rightCalloutAccessoryView as! UIButton
-            if let index = locations.index(of: annotation as! Location) {
+            if let index = locations.firstIndex(of: annotation as! Location) {
                 button.tag = index
             }
             
@@ -484,7 +484,7 @@ extension ViewController: MKMapViewDelegate {
             }
             
             let button = annotationView?.rightCalloutAccessoryView as! UIButton
-            if let index = locations.index(of: annotation as! Location) {
+            if let index = locations.firstIndex(of: annotation as! Location) {
                 button.tag = index
             }
             

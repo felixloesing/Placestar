@@ -46,7 +46,7 @@ class HudView: UIView {
         }
         
         //draw text
-        let attribs = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16), NSAttributedStringKey.foregroundColor: UIColor.white]
+        let attribs = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.white]
         
         //calc size of String
         let textSize = text.size(withAttributes: attribs)
@@ -63,7 +63,7 @@ class HudView: UIView {
             transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             
             //spring animation
-            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.6, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.6, options: UIView.AnimationOptions(rawValue: 0), animations: { () -> Void in
                 self.alpha = 1
                 self.transform = CGAffineTransform.identity
             }, completion: nil)
