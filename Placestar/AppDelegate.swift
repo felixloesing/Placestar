@@ -25,7 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        self.window?.tintColor = UIColor(red:0.998, green:0.057, blue:0, alpha:1)
+        //self.window?.tintColor = UIColor(red:0.998, green:0.057, blue:0, alpha:1)
+        self.window?.tintColor = UIColor.systemPink
         
         let navigationController = self.window!.rootViewController as! UINavigationController
         let controller = navigationController.topViewController as! ViewController

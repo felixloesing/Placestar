@@ -184,6 +184,8 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
             print("*** NSFetchedResultsChangeMove (object)")
             tableView.deleteRows(at: [indexPath!], with: .fade)
             tableView.insertRows(at: [newIndexPath!], with: .fade)
+        @unknown default:
+            fatalError()
         }
     }
     
@@ -202,6 +204,8 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
             
         case .move:
             print("*** NSFetchedResultsChangeMove (section)")
+        @unknown default:
+            fatalError()
         }
         
     }

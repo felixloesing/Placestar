@@ -71,9 +71,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         button.layer.cornerRadius = 35
         button.layer.masksToBounds = false
         button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.4
-        button.layer.shadowRadius = 1.5
-        button.layer.shadowOffset = CGSize(width: 2, height: 2)
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 1.2
+        button.layer.shadowOffset = CGSize(width: 1, height: 1)
         
         if UIDevice.current.modelName == "iPhone X" {
             self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height+50, left: 0, bottom: 0, right: 0);
@@ -134,6 +134,12 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         }
     }
     
+    func reloadData() {
+        performFetch()
+        updateLocations()
+        tableView.reloadData()
+    }
+    
     
     // MARK: - Table view data source
     
@@ -153,6 +159,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         cell.configureForLocation(location)
         let descriptionLabel = cell.viewWithTag(100) as! UILabel
         descriptionLabel.text = location.locationDescription
+        cell.selectionStyle = .none
         
         let adressLabel = cell.viewWithTag(101) as! UILabel
         if let placemark = location.placemark {
@@ -322,6 +329,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             print("*** NSFetchedResultsChangeMove (object)")
             tableView.deleteRows(at: [indexPath!], with: .fade)
             tableView.insertRows(at: [newIndexPath!], with: .fade)
+        @unknown default:
+            fatalError()
         }
     }
     
@@ -340,6 +349,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             
         case .move:
             print("*** NSFetchedResultsChangeMove (section)")
+        @unknown default:
+            fatalError()
         }
         
     }
@@ -383,10 +394,10 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         -> MKCoordinateRegion {
             var region: MKCoordinateRegion
             switch annotations.count { case 0:
-                region = MKCoordinateRegion.init( center: mapView.userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                region = MKCoordinateRegion.init( center: mapView.userLocation.coordinate, latitudinalMeters: 1200, longitudinalMeters: 1200)
             case 1:
                 let annotation = annotations[annotations.count - 1]
-                region = MKCoordinateRegion.init(center: annotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                region = MKCoordinateRegion.init(center: annotation.coordinate, latitudinalMeters: 1200, longitudinalMeters: 1200)
             default:
                 var topLeftCoord = CLLocationCoordinate2D(latitude: -90,
                                                           longitude: 180)
@@ -402,7 +413,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
                     (topLeftCoord.latitude - bottomRightCoord.latitude) / 2, longitude: topLeftCoord.longitude -
                         (topLeftCoord.longitude - bottomRightCoord.longitude) / 2)
                 
-                let extraSpace = 1.1
+                let extraSpace = 1.45
                 
                 let span = MKCoordinateSpan(
                     latitudeDelta: abs(topLeftCoord.latitude - bottomRightCoord.latitude) * extraSpace,

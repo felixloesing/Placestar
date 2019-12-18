@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		DC15B8311CD1F88100C2309C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC15B8301CD1F88100C2309C /* ViewController.swift */; };
 		DC15B8331CD1F8D200C2309C /* DCtableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC15B8321CD1F8D200C2309C /* DCtableView.swift */; };
+		DC1C6F3923AA0E7F0058CAFC /* munich.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DCA765B720BDF6D5000F9115 /* munich.gpx */; };
 		DC20E6621CE77E3200161479 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC20E6611CE77E3200161479 /* DetailViewController.swift */; };
 		DC2E15B21FB255F30053920A /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E15B11FB255F30053920A /* UIDevice+modelName.swift */; };
 		DC3112741B45F1760084BDF3 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3112731B45F1760084BDF3 /* HudView.swift */; };
 		DC67086D1B3AD37300C6F17C /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67086C1B3AD37300C6F17C /* CategoryPickerViewController.swift */; };
 		DC68E1651B30C3CD00491237 /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68E1641B30C3CD00491237 /* LocationDetailsViewController.swift */; };
+		DC73640323AA95A500991CD7 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC73640223AA95A500991CD7 /* Color.xcassets */; };
 		DC765B491CE9EA9500C8EF69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC765B471CE9EA9500C8EF69 /* Localizable.strings */; };
 		DC7D52441B274265002B3D0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D52431B274265002B3D0F /* AppDelegate.swift */; };
 		DC7D52461B274265002B3D0F /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D52451B274265002B3D0F /* CurrentLocationViewController.swift */; };
@@ -23,7 +25,6 @@
 		DC7D525C1B274265002B3D0F /* PlacestarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D525B1B274265002B3D0F /* PlacestarTests.swift */; };
 		DC88BD841BE299F600ABBA8B /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88BD831BE299F600ABBA8B /* LocationsViewController.swift */; };
 		DC95CB9C1CCFB04C00E8C207 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC95CB9B1CCFB04C00E8C207 /* UIImage+Resize.swift */; };
-		DCA765BB20BDF6D6000F9115 /* munich.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DCA765B720BDF6D5000F9115 /* munich.gpx */; };
 		DCA765BC20BDF6D6000F9115 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA765B820BDF6D5000F9115 /* Location+CoreDataProperties.swift */; };
 		DCA765BD20BDF6D6000F9115 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA765B920BDF6D5000F9115 /* Location.swift */; };
 		DCA765BE20BDF6D6000F9115 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA765BA20BDF6D6000F9115 /* LocationCell.swift */; };
@@ -65,6 +66,7 @@
 		DC3112731B45F1760084BDF3 /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
 		DC67086C1B3AD37300C6F17C /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		DC68E1641B30C3CD00491237 /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
+		DC73640223AA95A500991CD7 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		DC765B461CE9E70B00C8EF69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		DC765B481CE9EA9500C8EF69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DC765B4A1CE9EE1F00C8EF69 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				DCF686AB1BA6D5B000D7A9FF /* DataModel.xcdatamodeld */,
 				DC7D524E1B274265002B3D0F /* LaunchScreen.xib */,
 				DC7D52491B274265002B3D0F /* Main.storyboard */,
+				DC73640223AA95A500991CD7 /* Color.xcassets */,
 				DCA765B720BDF6D5000F9115 /* munich.gpx */,
 				DC7D52411B274265002B3D0F /* Supporting Files */,
 			);
@@ -242,7 +245,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Felix Lösing";
 				TargetAttributes = {
 					DC7D523D1B274265002B3D0F = {
@@ -287,11 +290,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC1C6F3923AA0E7F0058CAFC /* munich.gpx in Resources */,
 				DC7D524B1B274265002B3D0F /* Main.storyboard in Resources */,
-				DCA765BB20BDF6D6000F9115 /* munich.gpx in Resources */,
 				DC765B491CE9EA9500C8EF69 /* Localizable.strings in Resources */,
 				DC7D52501B274265002B3D0F /* LaunchScreen.xib in Resources */,
 				DC7D524D1B274265002B3D0F /* Images.xcassets in Resources */,
+				DC73640323AA95A500991CD7 /* Color.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +431,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -476,7 +480,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -492,7 +496,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = C7H8ATK9UZ;
 				INFOPLIST_FILE = Placestar/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.floesing.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Placestar;
@@ -508,7 +512,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = C7H8ATK9UZ;
 				INFOPLIST_FILE = Placestar/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.floesing.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Placestar;

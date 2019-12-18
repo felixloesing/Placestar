@@ -137,7 +137,6 @@ class LocationDetailsViewController: UITableViewController {
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
         tableView.backgroundView = nil
-        tableView.backgroundColor = UIColor.white
         
         //mapView tap recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.didTapMap(_:)))
@@ -149,13 +148,14 @@ class LocationDetailsViewController: UITableViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        /*
         if locationToEdit != nil {
         
             if (scrollView.contentOffset.y <= -120) {
                 dismiss(animated: true, completion: nil)
             }
             
-        }
+        */
     }
     
     @objc func cancelTapped() {
@@ -194,10 +194,10 @@ class LocationDetailsViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         if descriptionTextView.text == NSLocalizedString("enter-name-here", value: "enter name here…", comment: "") {
             descriptionTextView.font = UIFont.italicSystemFont(ofSize: descriptionTextView.font!.pointSize)
-            descriptionTextView.textColor = UIColor.gray
+            descriptionTextView.textColor = UIColor(named: "TextLight")
         } else {
             descriptionTextView.font = UIFont.boldSystemFont(ofSize: descriptionTextView.font!.pointSize)
-            descriptionTextView.textColor = UIColor.black
+            descriptionTextView.textColor = UIColor(named: "TextDark")
         }
     }
     
@@ -206,7 +206,7 @@ class LocationDetailsViewController: UITableViewController {
         print("*** deinit \(self)")
         //print(observer)
         if observer != nil {
-            NotificationCenter.default.removeObserver(observer)
+            NotificationCenter.default.removeObserver(observer as Any)
             print("*** deleted observer")
         }
     }
@@ -374,6 +374,10 @@ class LocationDetailsViewController: UITableViewController {
         } else if segue.identifier == "backHome" {
             //let controller = segue.destinationViewController as! ViewController
             //controller.managedObjectContext = managedObjectContext
+        } else if segue.identifier == "unwindToPlacestar" {
+            print("updated locations")
+            let controller = segue.destination as! ViewController
+            controller.reloadData()
         }
     }
     
@@ -475,7 +479,7 @@ extension LocationDetailsViewController: UITextViewDelegate {
         
         if descriptionTextView.text == "" {
             descriptionTextView.font = UIFont.italicSystemFont(ofSize: descriptionTextView.font!.pointSize)
-            descriptionTextView.textColor = UIColor.gray
+            descriptionTextView.textColor = UIColor(named: "TextLight")
             descriptionTextView.text = NSLocalizedString("enter-name-here", value: "enter name here…", comment: "")
         }
     }
@@ -492,7 +496,7 @@ extension LocationDetailsViewController: UITextViewDelegate {
         }
         
         descriptionTextView.font = UIFont.boldSystemFont(ofSize: descriptionTextView.font!.pointSize)
-        descriptionTextView.textColor = UIColor.black
+        descriptionTextView.textColor = UIColor(named: "TextDark")
         
         if textView.text == NSLocalizedString("enter-name-here", value: "enter name here…", comment: "") {
             textView.text = ""
