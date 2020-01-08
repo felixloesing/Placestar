@@ -2,7 +2,7 @@
 //  DCtableView.swift
 //  Placestar
 //
-//  Created by DC on 28.04.2016.
+//  Created by Felix Loesing on 28.04.2016.
 //  Copyright (c) 2016 Felix Lösing. All rights reserved.
 //
 
@@ -18,6 +18,5 @@ class DCtableView: UITableView, UITableViewDelegate {
         }
         return hitView
     }
- 
     
 }

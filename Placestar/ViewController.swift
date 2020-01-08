@@ -255,12 +255,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         }
     }
 
-    
-
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("++++++++++++++++++viewDidLayoutSubviews")
         
         if UIDevice.current.modelName == "iPhone X" {
             self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height-88, left: 0, bottom: 0, right: 0);
@@ -276,28 +272,17 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         }
     }
 
-
-
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView.contentOffset.y < self.mapView.frame.size.height * -1 ) {
             scrollView .setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: self.mapView.frame.size.height * -1), animated: true)
         }
         
-        if UIDevice.current.modelName == "iPhone X" {
-            if (scrollView.contentOffset.y <= -235) {
-                var offset = scrollView.contentOffset
-                offset.y = -235
-                scrollView.contentOffset = offset
-            }
-        } else {
-            if (scrollView.contentOffset.y <= -235) {
-                var offset = scrollView.contentOffset
-                offset.y = -235
-                scrollView.contentOffset = offset
-            }
+        if (scrollView.contentOffset.y <= -235) {
+            var offset = scrollView.contentOffset
+            offset.y = -235
+            scrollView.contentOffset = offset
         }
     }
-
 
 
     // MARK: - FetchedResultController

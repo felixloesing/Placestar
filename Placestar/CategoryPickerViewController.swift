@@ -13,8 +13,6 @@ class CategoryPickerViewController: UITableViewController {
     
     var categories = [NSLocalizedString("no-category", value: "No Category", comment: ""), NSLocalizedString("museum", value: "Museum", comment: ""), NSLocalizedString("store", value: "Store", comment: ""), NSLocalizedString("bar", value: "Bar", comment: ""), NSLocalizedString("park", value: "Park", comment: ""), NSLocalizedString("bookstore", value: "Bookstore", comment: ""), NSLocalizedString("club", value: "Club", comment: ""), NSLocalizedString("grocery-store", value: "Grocery Store", comment: ""),NSLocalizedString("beautiful-view", value: "Beautiful View", comment: ""), NSLocalizedString("historic-building", value: "Historic Building", comment: ""), NSLocalizedString("house", value: "House", comment: ""),NSLocalizedString("company", value: "Company", comment: ""), NSLocalizedString("icecream-vendor", value: "Icecream Vendor", comment: ""), NSLocalizedString("valley", value: "Valley", comment: ""), NSLocalizedString("landmark", value: "Landmark", comment: ""), NSLocalizedString("restaurant", value: "Restaurant", comment: ""), NSLocalizedString("city", value: "City", comment: ""),]
     
-    
-    
     var customCat = false
     
     override func viewDidLoad() {
@@ -41,6 +39,7 @@ class CategoryPickerViewController: UITableViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
+    
     //MARK: - TableView Data Source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,8 +71,6 @@ class CategoryPickerViewController: UITableViewController {
                 if let indexPath = tableView.indexPath(for: cell) {
                     selectedCategoryName = categories[(indexPath as NSIndexPath).row]
                 }
-            } else {
-                //selectedCategoryName = selectedCategoryName
             }
         }
     }

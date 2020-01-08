@@ -32,7 +32,6 @@ class LocationDetailsViewController: UITableViewController {
     @IBOutlet weak var addPhotoLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
-    
     var managedObjectContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)

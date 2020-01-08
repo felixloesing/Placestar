@@ -11,15 +11,6 @@ import CoreData
 import MapKit
 
 class Location: NSManagedObject, MKAnnotation {
-
-    /*
-    @NSManaged var latitude: Double
-    @NSManaged var longitude: Double
-    @NSManaged var date: NSDate
-    @NSManaged var locationDescription: String
-    @NSManaged var category: String
-    @NSManaged var placemark: CLPlacemark?
-    */
     
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2DMake(latitude, longitude)
@@ -30,8 +21,7 @@ class Location: NSManagedObject, MKAnnotation {
             return NSLocalizedString("(no-description)", value: "(No Description)", comment: "")
         } else {
             return locationDescription
-        
-    }
+        }
     }
     
     var subtitle: String? {
@@ -48,8 +38,6 @@ class Location: NSManagedObject, MKAnnotation {
         return UIImage(contentsOfFile: photoPath)
     }
     
-    
-    
     class func nextPhotoID() -> Int {
         let userDefaults = UserDefaults.standard
         let currentID = userDefaults.integer(forKey: "PhotoID")
@@ -62,7 +50,6 @@ class Location: NSManagedObject, MKAnnotation {
     var hasPhoto: Bool {
         return photoID != nil
     }
-    
     
     func removePhotoFile() {
         if hasPhoto {
@@ -78,10 +65,4 @@ class Location: NSManagedObject, MKAnnotation {
             }
         }
     }
-
-
 }
-
-
-
-
