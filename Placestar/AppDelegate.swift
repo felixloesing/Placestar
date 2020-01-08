@@ -3,7 +3,7 @@
 //  Placestar
 //
 //  Created by Felix Lösing on 09.06.15.
-//  Copyright (c) 2015 Felix Lösing. All rights reserved.
+//  Copyright (c) 2020 Felix Lösing. All rights reserved.
 //
 
 import UIKit
@@ -20,7 +20,6 @@ func fatalCoreDataError(_ error: Error) {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -82,7 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return rootViewController
         }
     }
-    
     
     lazy var managedObjectContext: NSManagedObjectContext = {
         guard let modelURL = Bundle.main.url(forResource: "DataModel", withExtension: "momd") else {

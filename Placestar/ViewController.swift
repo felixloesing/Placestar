@@ -3,7 +3,7 @@
 //  Placestar
 //
 //  Created by Felix Lösing on 28.04.16.
-//  Copyright © 2016 Felix Lösing. All rights reserved.
+//  Copyright © 2020 Felix Lösing. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,6 @@ import CoreLocation
 var tableView: UITableView!
 
 class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
-
     
     @IBOutlet weak var tableView: DCtableView!
     @IBOutlet weak var mapView: MKMapView!
@@ -75,11 +74,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         button.layer.shadowRadius = 1.2
         button.layer.shadowOffset = CGSize(width: 1, height: 1)
         
-        if UIDevice.current.modelName == "iPhone X" {
-            self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height+50, left: 0, bottom: 0, right: 0);
-        } else {
-            self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height+30, left: 0, bottom: 0, right: 0);
-        }
+        //self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height+30, left: 0, bottom: 85, right: 0);
         
         let authStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
@@ -108,6 +103,13 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         //performFetch()
         //tableView.reloadData()
 
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height-65, left: 0, bottom: 70, right: 0);
+        self.tableView.contentOffset.y = -290
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -160,6 +162,28 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         let descriptionLabel = cell.viewWithTag(100) as! UILabel
         descriptionLabel.text = location.locationDescription
         cell.selectionStyle = .none
+        
+        let timestampLabel = cell.viewWithTag(234) as! UILabel
+        let diffInDays = Calendar.current.dateComponents([.day], from: location.date, to: Date()).day
+        
+        var timestampString = ""
+        if diffInDays! > 365 {
+            let calcYears:Int = diffInDays!/365
+            timestampString += "\(calcYears) "
+            if calcYears == 1 {
+                timestampString += NSLocalizedString("year", value: "year", comment: "")
+            } else {
+                timestampString += NSLocalizedString("years", value: "years", comment: "")
+            }
+        } else {
+            timestampString += "\(diffInDays!) "
+            if diffInDays == 1 {
+                timestampString += NSLocalizedString("day", value: "day", comment: "")
+            } else {
+                timestampString += NSLocalizedString("days", value: "days", comment: "")
+            }
+        }
+        timestampLabel.text = timestampString
         
         let adressLabel = cell.viewWithTag(101) as! UILabel
         if let placemark = location.placemark {
@@ -252,23 +276,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             let button = sender as! UIButton
             let location = locations[button.tag]
             controller.locationToEdit = location
-        }
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        if UIDevice.current.modelName == "iPhone X" {
-            self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height-88, left: 0, bottom: 0, right: 0);
-        } else {
-            self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height-65, left: 0, bottom: 0, right: 0);
-        }
-        
-        //      iPhone X = 235; rest = 290
-        if UIDevice.current.modelName == "iPhone X" {
-            self.tableView.contentOffset.y = -235
-        } else {
-            self.tableView.contentOffset.y = -290
         }
     }
 

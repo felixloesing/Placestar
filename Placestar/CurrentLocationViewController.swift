@@ -3,7 +3,7 @@
 //  Placestar
 //
 //  Created by Felix Lösing on 09.06.15.
-//  Copyright (c) 2015 Felix Lösing. All rights reserved.
+//  Copyright (c) 2020 Felix Lösing. All rights reserved.
 //
 
 import UIKit
@@ -17,7 +17,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var tagButton: UIButton!
-
     
     var managedObjectContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
@@ -85,8 +84,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         updateLabels()
         configureGetButton()
     }
-    
-    
     
     func showLocationServicesDeniedAlert() {
         let alert = UIAlertController(title: NSLocalizedString("location-services-title", value: "Location Service disabled", comment: "Location service title"), message: NSLocalizedString("location-services-message", value: "Please enable Location Services in Settings.", comment: "Location service message"), preferredStyle: UIAlertController.Style.alert)
@@ -168,7 +165,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
     }
     
-    
     func configureGetButton() {
         if updatingLocation {
             //getButton.setTitle("Stop", forState: .Normal)
@@ -178,8 +174,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             print("GetButton: *** Get my Location")
         }
     }
-    
-    
     
     func stringFromPlacemark(_ placemark: CLPlacemark) -> String {
         var line1 = ""
@@ -219,7 +213,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     // MARK: - CLLocationManagerDelegate
-    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("didFailwithError \(error)")
         if (error as NSError).code == CLError.locationUnknown.rawValue {
@@ -316,6 +309,4 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             controller.managedObjectContext = managedObjectContext
         }
     }
-
 }
-
