@@ -3,7 +3,7 @@
 //  Placestar
 //
 //  Created by Felix Lösing on 24.06.15.
-//  Copyright (c) 2015 Felix Lösing. All rights reserved.
+//  Copyright (c) 2020 Felix Lösing. All rights reserved.
 //
 
 import UIKit
@@ -21,8 +21,6 @@ class CategoryPickerViewController: UITableViewController {
     }
     
     @IBAction func addCustom(_ sender: AnyObject) {
-        print("custom")
-        
         let alert = UIAlertController(title: NSLocalizedString("custom-category", value: "Custom Category", comment: ""), message: NSLocalizedString("enter-custom-category", value: "enter custom Category", comment: ""), preferredStyle: .alert)
         
         alert.addTextField(configurationHandler: { (textField) -> Void in
@@ -78,7 +76,5 @@ class CategoryPickerViewController: UITableViewController {
     //MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-
     }
 }

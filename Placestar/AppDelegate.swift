@@ -12,7 +12,7 @@ import CoreData
 let MyManagedObjectContextSaveDidFailNotification = "MyManagedObjectContextSaveDidFailNotification"
 
 func fatalCoreDataError(_ error: Error) {
-    print("Fatal Error: \(error) ***")
+    print("Fatal Error: \(error)")
     NotificationCenter.default.post(name: Notification.Name(rawValue: MyManagedObjectContextSaveDidFailNotification), object: nil)
 }
 

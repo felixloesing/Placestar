@@ -3,7 +3,7 @@
 //  Placestar
 //
 //  Created by Felix Lösing on 03.07.15.
-//  Copyright (c) 2015 Felix Lösing. All rights reserved.
+//  Copyright (c) 2020 Felix Lösing. All rights reserved.
 //
 
 import UIKit
@@ -67,14 +67,6 @@ class HudView: UIView {
                 self.alpha = 1
                 self.transform = CGAffineTransform.identity
             }, completion: nil)
-            
-            /*
-            UIView.animateWithDuration(0.4, animations: { () -> Void in
-                self.alpha = 1
-                self.transform = CGAffineTransformIdentity
-            })
-            */
         }
     }
-
 }

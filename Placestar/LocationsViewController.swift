@@ -3,7 +3,7 @@
 //  Placestar
 //
 //  Created by Felix Lösing on 29.10.15.
-//  Copyright © 2015 Felix Lösing. All rights reserved.
+//  Copyright © 2020 Felix Lösing. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,6 @@ import CoreLocation
 class LocationsViewController: UITableViewController {
     
     var managedObjectContext: NSManagedObjectContext!
-    
     
     lazy var fetchedResultsController: NSFetchedResultsController<Location> = {
         let fetchRequest = NSFetchRequest<Location>()
@@ -43,7 +42,6 @@ class LocationsViewController: UITableViewController {
         performFetch()
         
         navigationItem.rightBarButtonItem = editButtonItem
-        
     }
     
     func performFetch() {
@@ -59,6 +57,7 @@ class LocationsViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,7 +65,6 @@ class LocationsViewController: UITableViewController {
         return sectionInfo.numberOfObjects
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
         
@@ -97,16 +95,6 @@ class LocationsViewController: UITableViewController {
 
         return cell
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -151,8 +139,6 @@ class LocationsViewController: UITableViewController {
             }
         }
     }
-    
-
 }
 
 extension LocationsViewController: NSFetchedResultsControllerDelegate {
@@ -214,5 +200,4 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
         print("*** controllerDidChangeContent")
         tableView.endUpdates()
     }
-    
 }

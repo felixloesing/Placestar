@@ -26,7 +26,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     var updatingLocation = false
     var lastLocationError: NSError?
     
-    //(reverse) Geocoding
+    //reverse Geocoding
     let geocoder = CLGeocoder()
     var placemark: CLPlacemark?
     var performingReverseGeocoding = false
@@ -49,13 +49,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         addressLabel.clipsToBounds = true
     }
     
-    
     @IBAction func refreshButton(_ sender: AnyObject) {
         if updatingLocation {
             stopLocationManager()
         }
         getLocation()
     }
+    
     func getLocation() {
         //checking location service settings
         let authStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
@@ -177,7 +177,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     func stringFromPlacemark(_ placemark: CLPlacemark) -> String {
         var line1 = ""
-        
         if let s = placemark.subThoroughfare {
             line1 += s + " "
         }
@@ -186,7 +185,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
         
         var line2 = ""
-        
         if let s = placemark.locality {
             line2 += s + " "
         }
@@ -212,9 +210,11 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
     }
     
+    
     // MARK: - CLLocationManagerDelegate
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("didFailwithError \(error)")
+        print("Location manager failed with error \(error)")
         if (error as NSError).code == CLError.locationUnknown.rawValue {
             return
         }

@@ -3,7 +3,7 @@
 //  Placestar
 //
 //  Created by Felix Loesing on 28.04.2016.
-//  Copyright (c) 2016 Felix Lösing. All rights reserved.
+//  Copyright (c) 2020 Felix Lösing. All rights reserved.
 //
 
 import Foundation
@@ -18,5 +18,4 @@ class DCtableView: UITableView, UITableViewDelegate {
         }
         return hitView
     }
-    
 }

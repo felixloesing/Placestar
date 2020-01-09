@@ -22,7 +22,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     let locationManager = CLLocationManager()
     
     var managedObjectContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
-
     
     var alert: UIAlertController!
     
@@ -74,8 +73,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         button.layer.shadowRadius = 1.2
         button.layer.shadowOffset = CGSize(width: 1, height: 1)
         
-        //self.tableView.contentInset = UIEdgeInsets.init(top: self.mapView.frame.size.height+30, left: 0, bottom: 85, right: 0);
-        
         let authStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
         if authStatus == .notDetermined {
@@ -92,17 +89,10 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         if !locations.isEmpty {
             showLocations()
         }
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("appeared")
-        
-        //performFetch()
-        //tableView.reloadData()
-
     }
     
     override func viewDidLayoutSubviews() {
@@ -114,10 +104,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        performFetch()
-        tableView.reloadData()
-        //showLocations()
-        updateLocations()
+        reloadData()
         
         if startup == true {
             startup = false
@@ -125,7 +112,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             let region = regionForAnnotations(locations)
             mapView.setRegion(region, animated: false)
         }
-        
     }
     
     func performFetch() {
@@ -144,6 +130,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     
     // MARK: - Table view data source
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
@@ -203,14 +190,10 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         
         return cell
     }
-    
-
-    
+        
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 57.0
     }
-    
-    
     
     // Override to support editing the table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -241,35 +224,26 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     // MARK: - Navigation
     
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print(segue)
         if segue.identifier == "EditLocation" {
             let navController = segue.destination as! UINavigationController
             let controller = navController.topViewController as! LocationDetailsViewController
-            
             controller.managedObjectContext = managedObjectContext
             
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
                 let location = fetchedResultsController.object(at: indexPath)
                 controller.locationToEdit = location
-                
-                
             }
  
- 
-
         } else if segue.identifier == "add" {
-            
             let controller = (segue.destination as! CurrentLocationViewController)
             controller.managedObjectContext = self.managedObjectContext
             
         } else if segue.identifier == "EditMapLocation" {
             let navigationController = segue.destination as! UINavigationController
-            
             let controller = navigationController.topViewController as! LocationDetailsViewController
-            
             controller.managedObjectContext = managedObjectContext
             
             let button = sender as! UIButton
@@ -343,13 +317,11 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         @unknown default:
             fatalError()
         }
-        
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print("*** controllerDidChangeContent")
         tableView.endUpdates()
-        
     }
     
     
@@ -421,81 +393,39 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
 extension ViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if #available(iOS 11.0, *) {
+        guard annotation is Location else {
+            return nil
+        }
+        
+        let identifier = "Location"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKMarkerAnnotationView?
+        
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.isEnabled = true
+            annotationView?.canShowCallout = true
+            annotationView?.animatesWhenAdded = false
+            annotationView?.markerTintColor = UIColor.systemPink
+            annotationView?.displayPriority = MKFeatureDisplayPriority.required
             
-            guard annotation is Location else {
-                return nil
-            }
+            let rightButton = UIButton(type: .detailDisclosure)
+            rightButton.addTarget(self, action: #selector(ViewController.showLocationDetails(_:)), for: .touchUpInside)
             
-            let identifier = "Location"
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKMarkerAnnotationView?
-            
-            if annotationView == nil {
-                annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                
-                annotationView?.isEnabled = true
-                annotationView?.canShowCallout = true
-                annotationView?.animatesWhenAdded = false
-                annotationView?.markerTintColor = UIColor(red:0.13, green:0.82, blue:0.17, alpha:1.0)
-                //                red: 0.32, green: 0.82, blue: 0.4, alpha: 1)
-                annotationView?.displayPriority = MKFeatureDisplayPriority.required
-                
-                let rightButton = UIButton(type: .detailDisclosure)
-                rightButton.addTarget(self, action: #selector(ViewController.showLocationDetails(_:)), for: .touchUpInside)
-                
-                annotationView?.rightCalloutAccessoryView = rightButton
-                
-            } else {
-                annotationView?.annotation = annotation
-            }
-            
-            let button = annotationView?.rightCalloutAccessoryView as! UIButton
-            if let index = locations.firstIndex(of: annotation as! Location) {
-                button.tag = index
-            }
-            
-            return annotationView
-            
+            annotationView?.rightCalloutAccessoryView = rightButton
             
         } else {
-            // Fallback on earlier versions
-            
-            
-            guard annotation is Location else {
-                return nil
-            }
-            
-            let identifier = "Location"
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as! MKPinAnnotationView?
-            
-            if annotationView == nil {
-                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                
-                annotationView?.isEnabled = true
-                annotationView?.canShowCallout = true
-                annotationView?.animatesDrop = false
-                annotationView?.pinTintColor = UIColor(red: 0.32, green: 0.82, blue: 0.4, alpha: 1)
-                
-                let rightButton = UIButton(type: .detailDisclosure)
-                rightButton.addTarget(self, action: #selector(MapViewController.showLocationDetails(_:)), for: .touchUpInside)
-                
-                annotationView?.rightCalloutAccessoryView = rightButton
-                
-            } else {
-                annotationView?.annotation = annotation
-            }
-            
-            let button = annotationView?.rightCalloutAccessoryView as! UIButton
-            if let index = locations.firstIndex(of: annotation as! Location) {
-                button.tag = index
-            }
-            
-            return annotationView
+            annotationView?.annotation = annotation
         }
+        
+        let button = annotationView?.rightCalloutAccessoryView as! UIButton
+        if let index = locations.firstIndex(of: annotation as! Location) {
+            button.tag = index
+        }
+        
+        return annotationView
     }
     
     @objc func showLocationDetails(_ sender: UIButton) {
         performSegue(withIdentifier: "EditMapLocation", sender: sender)
     }
-
 }

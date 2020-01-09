@@ -3,7 +3,7 @@
   Placestar
 
   Created by Felix Lösing on 16.05.16.
-  Copyright © 2016 Felix Lösing. All rights reserved.
+  Copyright © 2020 Felix Lösing. All rights reserved.
 */
 
 "location-services-title" = "Ortungsdienste deaktiviert";
@@ -16,29 +16,29 @@
 
 "error-finding-address" = "Fehler bei der Adresssuche";
 
-"searching..." = "Suchen...";
+"searching..." = "Suchen…";
 
 "error-getting-location" = "Fehler Position bestimmen";
 
 "location-services-disabled" = "Ortungsdienste deaktiviert";
 
-"no-category" = "keine Kategorie";
+"no-category" = "Keine Kategorie";
 
 "photo-library" = "Fotoarchiv";
 
-"choose-from-library" = "aus Bibliothek wählen";
+"choose-from-library" = "Aus Bibliothek wählen";
 
 "cancel" = "Abbrechen";
 
 "camera" = "Kamera";
 
-"save-current-photo" = "aktuelles Foto speichern";
+"save-current-photo" = "Aktuelles Foto speichern";
 
 "(no-description)" = "(keine Beschreibung)";
 
 "custom-category" = "eigene Kategorie";
 
-"enter-custom-category" = "eigene Kategorie eingeben";
+"enter-custom-category" = "Eigene Kategorie eingeben";
 
 "museum" = "Museum";
 
@@ -52,11 +52,11 @@
 
 "club" = "Club";
 
-"grocery-store" = "Lebensmittelmarkt";
+"grocery-store" = "Supermarkt";
 
-"beautiful-view" = "schöner Ausblick";
+"beautiful-view" = "Schöner Ausblick";
 
-"historic-building" = "historisches Gebäude";
+"historic-building" = "Historisches Gebäude";
 
 "house" = "Haus";
 

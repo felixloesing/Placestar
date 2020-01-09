@@ -3,7 +3,7 @@
 //  Placestar
 //
 //  Created by Felix Lösing on 16.06.15.
-//  Copyright (c) 2015 Felix Lösing. All rights reserved.
+//  Copyright (c) 2020 Felix Lösing. All rights reserved.
 //
 
 import Foundation
@@ -16,7 +16,6 @@ private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .medium
     formatter.timeStyle = .short
-    print("dateFormatter created")
     return formatter
 }()
 

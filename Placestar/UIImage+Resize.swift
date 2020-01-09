@@ -3,7 +3,7 @@
 //  Placestar
 //
 //  Created by Felix Lösing on 26.04.16.
-//  Copyright © 2016 Felix Lösing. All rights reserved.
+//  Copyright © 2020 Felix Lösing. All rights reserved.
 //
 
 import Foundation
