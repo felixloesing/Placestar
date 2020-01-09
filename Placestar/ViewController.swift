@@ -144,7 +144,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     
     // MARK: - Table view data source
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
@@ -156,18 +155,18 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         
         let location = fetchedResultsController.object(at: indexPath)
         
-        // Configure the cell...
-        
+        //Configure the cell...
         cell.configureForLocation(location)
         let descriptionLabel = cell.viewWithTag(100) as! UILabel
         descriptionLabel.text = location.locationDescription
         cell.selectionStyle = .none
         
+        //Display the timestamp of creation relative to the current day
+        //Switches to years if more than 364 days ago
         let timestampLabel = cell.viewWithTag(234) as! UILabel
         let diffInDays = Calendar.current.dateComponents([.day], from: location.date, to: Date()).day
-        
         var timestampString = ""
-        if diffInDays! > 365 {
+        if diffInDays! >= 365 {
             let calcYears:Int = diffInDays!/365
             timestampString += "\(calcYears) "
             if calcYears == 1 {
@@ -185,21 +184,21 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         }
         timestampLabel.text = timestampString
         
-        let adressLabel = cell.viewWithTag(101) as! UILabel
+        let addressLabel = cell.viewWithTag(101) as! UILabel
         if let placemark = location.placemark {
-            var text = ""
+            var addressText = ""
             if let s = placemark.subThoroughfare {
-                text += s + " "
+                addressText += s + " "
             }
             if let s = placemark.thoroughfare {
-                text += s + ", "
+                addressText += s + ", "
             }
             if let s = placemark.locality {
-                text += s
+                addressText += s
             }
-            adressLabel.text = text
+            addressLabel.text = addressText
         } else {
-            adressLabel.text = ""
+            addressLabel.text = ""
         }
         
         return cell
