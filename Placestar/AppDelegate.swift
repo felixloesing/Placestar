@@ -24,11 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        self.window?.tintColor = UIColor.systemPink
+        self.window?.tintColor = UIColor.systemRed
         
         let navigationController = self.window!.rootViewController as! UINavigationController
         let controller = navigationController.topViewController as! ViewController
+        
+        NSSecureCodingValueTransformer<CLPlacemark>.registerTransformer()
+        
         controller.managedObjectContext = self.managedObjectContext
+        
         
         listenForFatalCoreDataNotification()
         return true
@@ -98,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         do {
             let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption : true, NSInferMappingModelAutomaticallyOption : true])
             
             let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
             context.persistentStoreCoordinator = coordinator

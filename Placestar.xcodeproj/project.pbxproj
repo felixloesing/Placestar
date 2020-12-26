@@ -21,6 +21,8 @@
 		DC7D525C1B274265002B3D0F /* PlacestarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D525B1B274265002B3D0F /* PlacestarTests.swift */; };
 		DC88BD841BE299F600ABBA8B /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88BD831BE299F600ABBA8B /* LocationsViewController.swift */; };
 		DC95CB9C1CCFB04C00E8C207 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC95CB9B1CCFB04C00E8C207 /* UIImage+Resize.swift */; };
+		DC9D5AA32597BA160061B9FE /* NSSecureCodingValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9D5AA22597BA160061B9FE /* NSSecureCodingValueTransformer.swift */; };
+		DC9D5AA72597BA4E0061B9FE /* CLPlacemark+Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9D5AA62597BA4E0061B9FE /* CLPlacemark+Transformer.swift */; };
 		DCA765BC20BDF6D6000F9115 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA765B820BDF6D5000F9115 /* Location+CoreDataProperties.swift */; };
 		DCA765BD20BDF6D6000F9115 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA765B920BDF6D5000F9115 /* Location.swift */; };
 		DCA765BE20BDF6D6000F9115 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA765BA20BDF6D6000F9115 /* LocationCell.swift */; };
@@ -77,6 +79,9 @@
 		DC7D525B1B274265002B3D0F /* PlacestarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacestarTests.swift; sourceTree = "<group>"; };
 		DC88BD831BE299F600ABBA8B /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		DC95CB9B1CCFB04C00E8C207 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		DC9732F325976BCF004CF770 /* DataModel v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DataModel v2.xcdatamodel"; sourceTree = "<group>"; };
+		DC9D5AA22597BA160061B9FE /* NSSecureCodingValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSSecureCodingValueTransformer.swift; sourceTree = "<group>"; };
+		DC9D5AA62597BA4E0061B9FE /* CLPlacemark+Transformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLPlacemark+Transformer.swift"; sourceTree = "<group>"; };
 		DCA765B820BDF6D5000F9115 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DCA765B920BDF6D5000F9115 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		DCA765BA20BDF6D6000F9115 /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
@@ -141,7 +146,9 @@
 				DC88BD831BE299F600ABBA8B /* LocationsViewController.swift */,
 				DC67086C1B3AD37300C6F17C /* CategoryPickerViewController.swift */,
 				DC95CB9B1CCFB04C00E8C207 /* UIImage+Resize.swift */,
+				DC9D5AA22597BA160061B9FE /* NSSecureCodingValueTransformer.swift */,
 				DC15B8321CD1F8D200C2309C /* DCtableView.swift */,
+				DC9D5AA62597BA4E0061B9FE /* CLPlacemark+Transformer.swift */,
 				DC7D524C1B274265002B3D0F /* Images.xcassets */,
 				DCF686AB1BA6D5B000D7A9FF /* DataModel.xcdatamodeld */,
 				DC7D524E1B274265002B3D0F /* LaunchScreen.xib */,
@@ -299,9 +306,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC15B8311CD1F88100C2309C /* ViewController.swift in Sources */,
+				DC9D5AA32597BA160061B9FE /* NSSecureCodingValueTransformer.swift in Sources */,
 				DC68E1651B30C3CD00491237 /* LocationDetailsViewController.swift in Sources */,
 				DCF686AD1BA6D5B000D7A9FF /* DataModel.xcdatamodeld in Sources */,
 				DC3112741B45F1760084BDF3 /* HudView.swift in Sources */,
+				DC9D5AA72597BA4E0061B9FE /* CLPlacemark+Transformer.swift in Sources */,
 				DC88BD841BE299F600ABBA8B /* LocationsViewController.swift in Sources */,
 				DCA765BE20BDF6D6000F9115 /* LocationCell.swift in Sources */,
 				DC15B8331CD1F8D200C2309C /* DCtableView.swift in Sources */,
@@ -580,9 +589,10 @@
 		DCF686AB1BA6D5B000D7A9FF /* DataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				DC9732F325976BCF004CF770 /* DataModel v2.xcdatamodel */,
 				DCF686AC1BA6D5B000D7A9FF /* DataModel.xcdatamodel */,
 			);
-			currentVersion = DCF686AC1BA6D5B000D7A9FF /* DataModel.xcdatamodel */;
+			currentVersion = DC9732F325976BCF004CF770 /* DataModel v2.xcdatamodel */;
 			path = DataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

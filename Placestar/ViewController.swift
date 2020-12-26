@@ -405,7 +405,7 @@ extension ViewController: MKMapViewDelegate {
             annotationView?.isEnabled = true
             annotationView?.canShowCallout = true
             annotationView?.animatesWhenAdded = false
-            annotationView?.markerTintColor = UIColor.systemPink
+            annotationView?.markerTintColor = UIColor.systemRed
             annotationView?.displayPriority = MKFeatureDisplayPriority.required
             
             let rightButton = UIButton(type: .detailDisclosure)
