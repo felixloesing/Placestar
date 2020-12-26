@@ -18,7 +18,6 @@
 		DC7D52461B274265002B3D0F /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D52451B274265002B3D0F /* CurrentLocationViewController.swift */; };
 		DC7D524B1B274265002B3D0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC7D52491B274265002B3D0F /* Main.storyboard */; };
 		DC7D524D1B274265002B3D0F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC7D524C1B274265002B3D0F /* Images.xcassets */; };
-		DC7D52501B274265002B3D0F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC7D524E1B274265002B3D0F /* LaunchScreen.xib */; };
 		DC7D525C1B274265002B3D0F /* PlacestarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D525B1B274265002B3D0F /* PlacestarTests.swift */; };
 		DC88BD841BE299F600ABBA8B /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88BD831BE299F600ABBA8B /* LocationsViewController.swift */; };
 		DC95CB9C1CCFB04C00E8C207 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC95CB9B1CCFB04C00E8C207 /* UIImage+Resize.swift */; };
@@ -280,7 +279,6 @@
 			files = (
 				DC7D524B1B274265002B3D0F /* Main.storyboard in Resources */,
 				DC765B491CE9EA9500C8EF69 /* Localizable.strings in Resources */,
-				DC7D52501B274265002B3D0F /* LaunchScreen.xib in Resources */,
 				DC7D524D1B274265002B3D0F /* Images.xcassets in Resources */,
 				DC73640323AA95A500991CD7 /* Colors.xcassets in Resources */,
 			);
@@ -487,6 +485,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.floesing.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_MODULE_NAME = Placestar;
 				PRODUCT_NAME = Placestar;
 				SWIFT_VERSION = 5.0;
 			};
@@ -505,6 +504,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.floesing.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_MODULE_NAME = Placestar;
 				PRODUCT_NAME = Placestar;
 				SWIFT_VERSION = 5.0;
 			};
@@ -522,6 +522,7 @@
 				INFOPLIST_FILE = PlacestarTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.floesing.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_MODULE_NAME = PlacestarTests;
 				PRODUCT_NAME = Placestar;
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Placestar.app/Placestar";
@@ -536,6 +537,7 @@
 				INFOPLIST_FILE = PlacestarTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.floesing.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_MODULE_NAME = PlacestarTests;
 				PRODUCT_NAME = Placestar;
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Placestar.app/Placestar";
