@@ -542,6 +542,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tag Location" id="HZ5-cz-fUL">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="star" catalog="system" id="tim-5r-Gsf">
+                            <connections>
+                                <action selector="toggleFavorite:" destination="TgE-Mr-cTL" id="H3F-gh-bfN"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="PUG-y3-cf9">
                             <connections>
                                 <action selector="done" destination="TgE-Mr-cTL" id="KW0-GI-3b2"/>
@@ -554,6 +559,7 @@
                         <outlet property="categoryLabel" destination="bS6-AL-dUL" id="Q60-on-EtB"/>
                         <outlet property="dateLabel" destination="iVw-3D-sgG" id="GIL-Iw-a2y"/>
                         <outlet property="descriptionTextView" destination="UMx-hV-L9p" id="P2T-YB-cCf"/>
+                        <outlet property="favButton" destination="tim-5r-Gsf" id="9eO-Nv-fs0"/>
                         <outlet property="imageView" destination="hWv-tH-Kne" id="uOD-e6-iuL"/>
                         <outlet property="latitudeLabel" destination="Efv-an-NLU" id="vDR-AQ-MlU"/>
                         <outlet property="longitudeLabel" destination="VS4-Bq-E74" id="hEf-bV-My3"/>
@@ -661,6 +667,7 @@
         <image name="Tag" width="30" height="30"/>
         <image name="User" width="24" height="24"/>
         <image name="first" width="30" height="30"/>
+        <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="BackgroundCurrentLocation">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

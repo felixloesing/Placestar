@@ -78,7 +78,7 @@
 
 "open-maps" = "Open Maps";
 
-"open-maps-prompt" = "Do you want to open the Maps App?";
+"open-maps-prompt" = "Do you want to open the current location in Maps?";
 
 "yes" = "Yes";
 

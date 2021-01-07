@@ -78,7 +78,7 @@
 
 "open-maps" = "Karten öffnen";
 
-"open-maps-prompt" = "Möchtest Du die Karten App öffnen?";
+"open-maps-prompt" = "Möchtest Du die aktuelle Adresse in Karten öffnen?";
 
 "yes" = "Ja";
 

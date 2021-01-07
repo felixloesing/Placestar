@@ -30,6 +30,7 @@ class LocationDetailsViewController: UITableViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var addPhotoLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var favButton: UIBarButtonItem!
     
     var managedObjectContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
@@ -70,10 +71,7 @@ class LocationDetailsViewController: UITableViewController {
         super.viewDidLoad()
         
         descriptionTextView.delegate = self
-        
-        
 
-        
         if let location = locationToEdit {
             title = ""
             
@@ -91,6 +89,12 @@ class LocationDetailsViewController: UITableViewController {
             let dropPin = MKPointAnnotation()
             dropPin.coordinate = pinLocation
             mapView.addAnnotation(dropPin)
+            
+            if location.favorite == true {
+                favButton.image = UIImage(systemName: "star.fill")
+            } else {
+                favButton.image = UIImage(systemName: "star")
+            }
             
 
         } else {
@@ -110,7 +114,6 @@ class LocationDetailsViewController: UITableViewController {
         
         longitudeLabel.text = String(format: "%.8f", coordinate.longitude)
         latitudeLabel.text = String(format: "%.8f", coordinate.latitude)
-        
         
         let region = MKCoordinateRegion.init(center: CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(mapView.regionThatFits(region), animated: true)
@@ -261,7 +264,7 @@ class LocationDetailsViewController: UITableViewController {
     
     @IBAction func done() {
         
-        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+        if var topController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
             }
@@ -276,10 +279,7 @@ class LocationDetailsViewController: UITableViewController {
             descriptionText = ""
             descriptionTextView.text = ""
         }
-        
         print("Description: \(descriptionText)")
-        
-        
         
         let location: Location
         
@@ -287,15 +287,13 @@ class LocationDetailsViewController: UITableViewController {
             //hudView.text = "updated"
             location = tmp
         } else {
-            let hudView = HudView.hudInView((UIApplication.shared.keyWindow?.subviews.last)!, animated: true)
+            let hudView = HudView.hudInView((UIApplication.shared.windows.first { $0.isKeyWindow }?.subviews.last)!, animated: true)
             hudView.text = "Tagged"
             //create CoreData Location object
             location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: managedObjectContext) as! Location
             
             location.photoID = nil
         }
-        
-
         
         //set properties of Location object
         location.locationDescription = descriptionTextView.text
@@ -360,6 +358,18 @@ class LocationDetailsViewController: UITableViewController {
     @IBAction func cancel() {
         dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "backHome", sender: nil)
+    }
+    
+    @IBAction func toggleFavorite(_ sender: UIBarButtonItem) {
+        if let location = locationToEdit {
+            if location.favorite == true {
+                location.favorite = false
+                favButton.image = UIImage(systemName: "star")
+            } else {
+                location.favorite = true
+                favButton.image = UIImage(systemName: "star.fill")
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

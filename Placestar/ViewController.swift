@@ -146,6 +146,11 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         cell.configureForLocation(location)
         let descriptionLabel = cell.viewWithTag(100) as! UILabel
         descriptionLabel.text = location.locationDescription
+        if location.favorite == true {
+            descriptionLabel.textColor = UIColor.systemRed
+        } else {
+            descriptionLabel.textColor = UIColor.black
+        }
         cell.selectionStyle = .none
         
         //Display the timestamp of creation relative to the current day
