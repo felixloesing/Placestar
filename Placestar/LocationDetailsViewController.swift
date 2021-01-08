@@ -44,6 +44,8 @@ class LocationDetailsViewController: UITableViewController {
     
     var observer: AnyObject!
     
+    var favoriteToSave: Bool = false
+    
     //image
     var image:UIImage?
     
@@ -60,7 +62,7 @@ class LocationDetailsViewController: UITableViewController {
                 date = location.date as Date
                 coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
                 placemark = location.placemark
-                
+                favoriteToSave = location.favorite
                 
             }
         }
@@ -92,8 +94,10 @@ class LocationDetailsViewController: UITableViewController {
             
             if location.favorite == true {
                 favButton.image = UIImage(systemName: "star.fill")
+                favoriteToSave = true
             } else {
                 favButton.image = UIImage(systemName: "star")
+                favoriteToSave = false
             }
             
 
@@ -270,6 +274,21 @@ class LocationDetailsViewController: UITableViewController {
             }
         }
         
+        saveData()
+        
+        afterDelay(0.0, closure: { () -> () in
+            //self.dismissViewControllerAnimated(true, completion: nil)
+            self.performSegue(withIdentifier: "unwindToPlacestar", sender: self)
+            
+            //var vc = UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("mainView")
+            
+            //self.presentViewController(vc, animated: true, completion: nil)
+            
+        })
+    }
+    
+    func saveData() {
+        
         if descriptionText == NSLocalizedString("enter-name-here", value: "enter name here…", comment: "") {
             descriptionText = ""
             descriptionTextView.text = ""
@@ -329,15 +348,6 @@ class LocationDetailsViewController: UITableViewController {
             fatalCoreDataError(error)
         }
         
-        afterDelay(0.0, closure: { () -> () in
-            //self.dismissViewControllerAnimated(true, completion: nil)
-            self.performSegue(withIdentifier: "unwindToPlacestar", sender: self)
-            
-            //var vc = UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("mainView")
-            
-            //self.presentViewController(vc, animated: true, completion: nil)
-            
-        })
     }
     
     // get destination controller after save and update annotations on map
@@ -364,11 +374,15 @@ class LocationDetailsViewController: UITableViewController {
         if let location = locationToEdit {
             if location.favorite == true {
                 location.favorite = false
+                favoriteToSave = false
                 favButton.image = UIImage(systemName: "star")
             } else {
                 location.favorite = true
+                favoriteToSave = true
                 favButton.image = UIImage(systemName: "star.fill")
             }
+            // Save change to database
+            saveData()
         }
     }
     

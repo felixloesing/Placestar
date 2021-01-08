@@ -13,7 +13,7 @@ import CoreLocation
 
 var tableView: UITableView!
 
-class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIAdaptivePresentationControllerDelegate {
     
     @IBOutlet weak var tableView: DCtableView!
     @IBOutlet weak var mapView: MKMapView!
@@ -236,6 +236,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             let navController = segue.destination as! UINavigationController
             let controller = navController.topViewController as! LocationDetailsViewController
             controller.managedObjectContext = managedObjectContext
+            segue.destination.presentationController?.delegate = self;
             
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
                 let location = fetchedResultsController.object(at: indexPath)
@@ -255,6 +256,10 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             let location = locations[button.tag]
             controller.locationToEdit = location
         }
+    }
+    
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        reloadData()
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
